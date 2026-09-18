@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雪国 · 北海道5天4晚（函馆进 · 札幌出）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.staticfile.org/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdn.staticfile.org/leaflet/1.9.4/leaflet.min.js"></script>
+<script>/* Leaflet 国内CDN兜底：staticfile 挂了就用 bootcdn */window.__leafletFallback=function(){if(typeof L==='undefined'){var s=document.createElement('script');s.src='https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.js';document.head.appendChild(s);}};window.addEventListener('error',function(e){if(e&&e.target&&e.target.tagName==='SCRIPT'&&/leaflet/i.test(e.target.src)){window.__leafletFallback();}},true);</script>
+<style>
+/* Hallmark · macrostructure: Long-Document Handbook · tone: 日式清冷·编辑感 · anchor hue: 绀青 255° */
+:root{
+  --paper:      oklch(97.2% 0.004 95);
+  --paper-deep: oklch(94.5% 0.006 95);
+  --ink:         oklch(25% 0.014 255);
+  --ink-soft:    oklch(38% 0.014 255);
+  --muted:       oklch(54% 0.015 255);
+  --hair:        oklch(87% 0.009 100);
+  --indigo:      oklch(41% 0.058 255);
+  --indigo-deep: oklch(33% 0.055 255);
+  --indigo-soft: oklch(94.5% 0.014 255);
+  --seal:        oklch(48% 0.125 30);
+  --seal-soft:   oklch(96% 0.014 30);
+  --ice:         oklch(84% 0.028 230);
+  --font-display: 'Noto Serif SC','Songti SC','SimSun',serif;
+  --font-body:    'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 72px;
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-in-out: cubic-bezier(.65,0,.35,1);
+  --dur-1: 160ms; --dur-2: 320ms;
+  --rule: 1px;
+  --radius: 3px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:clip}
+html{scroll-behavior:auto}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.75;
+  font-size:15px;
+}
+::selection{background:var(--ice);color:var(--ink)}
+body{padding-top:64px}
+@media (max-width:760px){body{padding-top:96px}}
+@supports(padding:max(0px)){
+  body{padding-top:max(64px,env(safe-area-inset-top))}
+  @media (max-width:760px){body{padding-top:max(96px,calc(env(safe-area-inset-top) + 60px))}}
+}
+#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
+main,header,nav,footer{position:relative;z-index:1}
+
+/* ---------- 顶部索引 ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);
+  padding:10px clamp(16px,4vw,40px);
+  background:oklch(97.2% 0.004 95 / .88);
+  backdrop-filter:blur(8px);
+  border-bottom:var(--rule) solid var(--hair);
+  transition:opacity var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out);
+}
+body.scrolled .topbar{
+  left:auto;right:14px;top:12px;width:auto;
+  border:var(--rule) solid var(--hair);border-radius:999px;
+  padding:5px 14px;background:oklch(97.2% 0.004 95 / .94);
+  box-shadow:0 4px 20px oklch(25% 0.014 255 / .12);
+}
+body.scrolled .topbar .brand{font-size:13px}
+body.scrolled .topbar .toplinks{display:none}
+.toc-btn{
+  display:none;font-size:11px;letter-spacing:.12em;color:var(--indigo);
+  text-decoration:none;border:var(--rule) solid var(--ice);border-radius:999px;
+  padding:3px 12px;margin-left:8px;white-space:nowrap;
+}
+.toc-btn:hover{border-color:var(--indigo)}
+.toc-btn:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+body.scrolled .topbar .toc-btn{display:inline-block}
+.brand{
+  font-family:var(--font-display);font-weight:700;font-size:15px;
+  letter-spacing:.14em;color:var(--ink);white-space:nowrap;
+}
+.brand i{font-style:normal;color:var(--seal);margin-left:2px}
+.toplinks{
+  display:flex;flex-wrap:nowrap;gap:2px 0;justify-content:flex-end;
+  font-size:12px;color:var(--muted);letter-spacing:.06em;
+}
+.toplinks a{
+  color:var(--muted);text-decoration:none;padding:2px 9px;
+  border-radius:2px;transition:color var(--dur-1) var(--ease-out);
+  white-space:nowrap;flex:none;
+}
+.toplinks a:hover{color:var(--indigo)}
+.toplinks a:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+.toplinks span.sep{color:var(--hair)}
+@media (max-width:760px){
+  .topbar{flex-wrap:wrap;padding:8px clamp(12px,4vw,16px);row-gap:6px}
+  .brand{font-size:13px;flex:1}
+  .toc-btn{display:inline-block;font-size:11px}
+  .toplinks{
+    order:3;width:100%;flex-basis:100%;
+    overflow-x:auto;white-space:nowrap;justify-content:flex-start;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    border-top:var(--rule) solid var(--hair);padding-top:5px;margin-top:2px;
+  }
+  .toplinks::-webkit-scrollbar{display:none}
+  .toplinks a{padding:2px 8px;font-size:11.5px}
+  .toplinks span.sep:first-child{display:none}
+}
+@supports(padding:max(0px)){
+  .topbar{padding-top:max(8px,env(safe-area-inset-top));padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+}
+
+/* ---------- 目录 TOC ---------- */
+.toc{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:var(--space-3) var(--space-6);margin-top:var(--space-4);
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  padding:var(--space-4) var(--space-5);background:var(--paper-deep);
+}
+.toc-col h3{
+  font-family:var(--font-display);font-size:12px;letter-spacing:.3em;
+  color:var(--indigo);font-weight:700;margin-bottom:4px;
+}
+.toc-col ul{list-style:none}
+.toc-col li{border-bottom:var(--rule) dashed var(--hair)}
+.toc-col li:last-child{border-bottom:none}
+.toc-col a{
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);
+  padding:7px 2px;color:var(--ink-soft);text-decoration:none;font-size:13px;
+  transition:color var(--dur-1) var(--ease-out);
+}
+.toc-col a:hover{color:var(--indigo)}
+.toc-col a:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+.toc-col a small{color:var(--muted);font-size:10.5px;letter-spacing:.06em;white-space:nowrap}
+
+/* ---------- 图片占位 ---------- */
+.photo{margin-top:var(--space-3);max-width:330px}
+.photo-box{
+  border:var(--rule) dashed var(--hair);border-radius:var(--radius);
+  background:var(--paper-deep);padding:var(--space-3) var(--space-4);
+  display:flex;align-items:center;gap:12px;min-height:60px;
+}
+.photo-tag{
+  font-size:10px;letter-spacing:.28em;color:var(--indigo);font-weight:500;
+  flex:none;border:var(--rule) solid var(--hair);border-radius:2px;padding:3px 6px;
+}
+.photo-name{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.photo figcaption{font-size:10.5px;color:var(--muted);margin-top:5px;line-height:1.7}
+.photo figcaption code{font-family:var(--font-body);background:var(--paper);padding:0 4px;border-radius:2px;font-size:10px}
+
+/* ---------- 小红书原帖链接 ---------- */
+.xhs{
+  display:inline-block;margin-top:8px;font-size:11.5px;color:var(--indigo);
+  text-decoration:none;border:var(--rule) solid var(--ice);border-radius:999px;
+  padding:3px 12px;letter-spacing:.02em;
+  transition:border-color var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out);
+}
+.xhs:hover{border-color:var(--indigo);color:var(--indigo-deep)}
+.xhs:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+.xhs .ar{font-style:normal;margin-left:3px}
+
+/* ---------- 附近美食/商店 ---------- */
+.nearby{
+  margin-top:10px;padding:10px 14px;
+  border:var(--rule) solid var(--hair);border-left:2px solid var(--indigo);
+  border-radius:var(--radius);background:var(--paper-deep);
+  font-size:12.5px;color:var(--ink-soft);line-height:1.85;
+}
+.nb-tag{
+  display:block;font-size:10px;letter-spacing:.28em;color:var(--indigo);
+  font-weight:500;margin-bottom:4px;
+}
+.nearby p{margin:2px 0}
+.nearby b{font-weight:600;color:var(--ink)}
+.nearby .dist{color:var(--indigo);font-size:11.5px}
+.dist{color:var(--indigo);font-size:11.5px}
+
+/* ---------- Hero ---------- */
+.hero{
+  max-width:1060px;margin:0 auto;
+  padding:var(--space-8) clamp(16px,4vw,40px) var(--space-6);
+  scroll-margin-top:90px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-6);
+  align-items:start;
+}
+.hero-eyebrow{
+  font-size:11px;letter-spacing:.42em;color:var(--indigo);
+  font-weight:500;text-transform:uppercase;margin-bottom:var(--space-4);
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(40px,7vw,74px);line-height:1.12;letter-spacing:.04em;
+  color:var(--ink);
+}
+.hero h1 em{font-style:normal;color:var(--indigo)}
+.hero .sub{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(21px,3.2vw,29px);color:var(--ink);
+  margin-top:var(--space-2);letter-spacing:.14em;
+}
+.hero-quote{
+  margin-top:var(--space-5);
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(15px,2.1vw,18px);line-height:2.05;
+  color:var(--ink-soft);
+}
+.hero-quote .q{display:inline-block;margin:0 .12em}
+.hero-quote .src{
+  display:block;margin-top:var(--space-2);
+  font-family:var(--font-body);font-size:11.5px;
+  color:var(--muted);letter-spacing:.22em;
+}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-3);
+  margin-top:var(--space-5);font-size:12.5px;color:var(--ink-soft);
+}
+.hero-meta span{
+  border:var(--rule) solid var(--hair);border-radius:999px;
+  padding:3px 13px;background:var(--paper-deep);white-space:nowrap;
+}
+.hero-side{display:flex;gap:var(--space-4);align-items:flex-start;padding-top:6px}
+.vtext{
+  writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;
+  font-size:13px;letter-spacing:.5em;color:var(--muted);
+}
+.seal{
+  width:56px;height:56px;background:var(--seal);color:var(--paper);
+  font-family:var(--font-display);font-weight:700;font-size:19px;
+  display:grid;place-items:center;border-radius:4px;letter-spacing:.1em;
+  line-height:1.15;text-align:center;writing-mode:vertical-rl;
+  box-shadow:0 1px 0 oklch(48% 0.125 30 / .25);
+  transform:rotate(2deg);
+}
+.hero-stats{
+  max-width:1060px;margin:0 auto;padding:0 clamp(16px,4vw,40px);
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:var(--rule) var(--space-6);
+  border-top:var(--rule) solid var(--hair);border-bottom:var(--rule) solid var(--hair);
+}
+.hstat{padding:var(--space-2) 0 var(--space-2) 2px}
+.hstat b{
+  display:block;font-family:var(--font-display);font-weight:900;
+  font-size:clamp(16px,2.3vw,20px);color:var(--ink);letter-spacing:.02em;line-height:1.25;
+}
+.hstat b i{font-style:normal;font-size:.6em;color:var(--indigo);margin-left:3px}
+.hstat small{color:var(--muted);font-size:10.5px;letter-spacing:.04em;line-height:1.5}
+
+/* ---------- 汇率卡 ---------- */
+.fx-card{
+  max-width:1060px;margin:var(--space-4) auto 0;
+  padding:0 clamp(16px,4vw,40px);
+}
+.fx-box{
+  border:var(--rule) solid var(--hair);border-left:3px solid var(--indigo);
+  border-radius:var(--radius);background:var(--paper-deep);
+  padding:var(--space-4) var(--space-5);
+}
+.fx-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px var(--space-4)}
+.fx-head .tag{font-size:10.5px;letter-spacing:.3em;color:var(--indigo);font-weight:500}
+.fx-head b{font-family:var(--font-display);font-size:clamp(17px,2.6vw,22px);font-weight:900;letter-spacing:.02em}
+.fx-head small{color:var(--muted);font-size:11.5px}
+.fx-quick{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:10px}
+.fx-quick span{
+  font-size:11.5px;color:var(--ink-soft);border:var(--rule) solid var(--hair);
+  border-radius:999px;padding:2px 11px;background:var(--paper);white-space:nowrap;
+}
+.fx-note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.7}
+@media (max-width:640px){.hero-side{display:none}}
+@media (max-width:760px){
+  .hero{padding-top:var(--space-5);padding-bottom:var(--space-5)}
+  .hero-quote{line-height:1.85;font-size:14px}
+  .hero-stats{grid-template-columns:repeat(2,1fr);gap:var(--space-3)}
+  .hstat{padding:var(--space-2) 0}
+}
+
+/* ---------- 章节 ---------- */
+main{max-width:1060px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+section{padding:var(--space-6) 0;border-bottom:var(--rule) solid var(--hair);scroll-margin-top:88px}
+section:last-of-type{border-bottom:none}
+.sec-head{display:flex;gap:var(--space-5);align-items:flex-start}
+.sec-label{flex:1;min-width:0}
+.sec-label .no{
+  font-size:11px;letter-spacing:.42em;color:var(--indigo);font-weight:500;
+  display:block;margin-bottom:var(--space-2);
+}
+.sec-label h2{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(24px,3.6vw,34px);letter-spacing:.06em;line-height:1.3;
+}
+.sec-label h2 small{font-size:.55em;color:var(--muted);font-weight:400;letter-spacing:.2em;margin-left:12px}
+.sec-jp{display:none}
+.sec-intro{color:var(--muted);font-size:13.5px;max-width:70ch;margin-top:var(--space-2)}
+
+/* ---------- 行前须知 ---------- */
+.prep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-3);margin-top:var(--space-3)}
+.prep{
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  padding:var(--space-4) var(--space-5);background:var(--paper-deep);
+}
+.prep h3{font-family:var(--font-display);font-size:15.5px;font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.prep h3 b{color:var(--indigo);font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:.2em;margin-right:10px}
+.prep p{font-size:13px;color:var(--muted);line-height:1.8}
+
+/* ---------- 路线图 ---------- */
+.route-svg{width:100%;height:auto;display:block;margin:var(--space-4) 0 var(--space-2)}
+.route-svg text{font-family:var(--font-body)}
+.rs-city{font-family:var(--font-display)!important;font-weight:700}
+.table-wrap{overflow-x:auto;border:var(--rule) solid var(--hair);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;background:var(--paper)}
+th{
+  text-align:left;font-weight:500;font-size:11.5px;letter-spacing:.14em;color:var(--muted);
+  padding:10px 14px;border-bottom:var(--rule) solid var(--hair);background:var(--paper-deep);
+  white-space:nowrap;
+}
+td{padding:10px 14px;border-bottom:var(--rule) solid var(--hair);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b{font-weight:500;color:var(--ink)}
+td .yen{color:var(--indigo);font-weight:500;white-space:nowrap}
+tr.day-row{cursor:pointer;transition:background var(--dur-1) var(--ease-out)}
+tr.day-row:hover{background:var(--paper-deep)}
+tr.day-row:hover td:first-child{border-left:3px solid var(--indigo)}
+td:first-child{padding-left:17px;border-left:3px solid transparent}
+.day-jump{
+  display:inline-block;text-decoration:none;color:var(--ink);
+  font-weight:700;letter-spacing:.02em;transition:color var(--dur-1) var(--ease-out);
+}
+.day-jump:hover,.day-jump:focus-visible{color:var(--indigo)}
+.day-jump::after{content:"→";margin-left:4px;font-weight:400;color:var(--indigo);opacity:0;transition:opacity var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-out)}
+tr.day-row:hover .day-jump::after{opacity:1;transform:translateX(2px)}
+.tbl-note{color:var(--muted);font-size:12px;margin-top:var(--space-3);line-height:1.8}
+
+/* ---------- 日程 ---------- */
+.day-head{
+  display:flex;gap:var(--space-5);align-items:flex-start;
+  padding-bottom:var(--space-2);border-bottom:var(--rule) solid var(--hair);
+}
+.day-label{flex:1;min-width:0}
+.day-label .eyebrow{
+  font-size:11px;letter-spacing:.42em;color:var(--indigo);font-weight:500;
+  display:block;margin-bottom:var(--space-2);
+}
+.day-label h2{
+  font-family:var(--font-display);font-weight:900;
+  font-size:clamp(22px,3.4vw,31px);letter-spacing:.05em;
+}
+.day-label h2 span{color:var(--muted);font-weight:600;font-size:.62em;letter-spacing:.15em;margin-left:12px}
+.day-label .day-sub{color:var(--muted);font-size:13px;margin-top:var(--space-1);max-width:72ch}
+.day-jp{display:none}
+
+.timeline{list-style:none;margin-top:var(--space-3)}
+.tl-item{
+  display:grid;grid-template-columns:88px minmax(0,1fr);gap:var(--space-4);
+  padding:var(--space-3) 0;border-bottom:var(--rule) dashed var(--hair);
+}
+.tl-item:last-child{border-bottom:none}
+.tl-time{
+  font-variant-numeric:tabular-nums;font-size:13px;color:var(--indigo);
+  font-weight:500;letter-spacing:.04em;padding-top:3px;white-space:nowrap;
+}
+.tl-time small{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:2px;letter-spacing:.1em}
+.tl-body h4{
+  font-family:var(--font-display);font-size:16.5px;font-weight:700;letter-spacing:.04em;
+}
+.tl-body h4 .jp{font-size:.68em;color:var(--muted);font-weight:400;margin-left:10px;letter-spacing:.18em}
+.tl-body p{font-size:13.5px;color:var(--ink-soft);margin-top:6px;line-height:1.85}
+.tl-body p b{font-weight:500}
+.reason{
+  margin-top:8px;font-size:12.5px;color:var(--muted);line-height:1.8;
+  padding-left:12px;border-left:2px solid var(--ice);
+}
+.reason b{
+  color:var(--indigo);font-weight:700;font-size:11px;letter-spacing:.22em;
+  margin-right:8px;font-style:normal;
+}
+.rec,.warn{
+  margin-top:8px;padding:10px 14px;border-radius:var(--radius);
+  font-size:12.5px;line-height:1.8;
+}
+.rec{border-left:2px solid var(--indigo);background:var(--indigo-soft);color:var(--ink-soft)}
+.warn{border-left:2px solid var(--seal);background:var(--seal-soft);color:var(--ink-soft)}
+.rec b,.warn b{
+  font-size:10.5px;letter-spacing:.25em;font-weight:700;margin-right:8px;
+  font-family:var(--font-body);
+}
+.rec b{color:var(--indigo)}
+.warn b{color:var(--seal)}
+@media (max-width:560px){
+  .tl-item{grid-template-columns:1fr;gap:4px}
+  .tl-time{padding-top:0}
+}
+
+/* ---------- 票据 ---------- */
+/* ---------- 真实地图 embed + 路线表 ---------- */
+.map-embed-wrap{
+  margin-top:var(--space-3);
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  overflow:hidden;background:var(--paper);
+  box-shadow:0 1px 0 oklch(50% 0 0 / .04);
+}
+.map-embed-frame{position:relative;width:100%;height:420px;background:var(--paper-deep)}
+.map-embed-frame iframe{width:100%;height:100%;min-height:420px;display:block}
+@media (max-width:640px){
+  .map-embed-frame{height:320px}
+  .map-embed-frame iframe{min-height:320px}
+}
+.map-fullscreen-btn{
+  display:block;padding:10px 14px;text-align:center;
+  background:var(--paper-deep);border-top:var(--rule) solid var(--hair);
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.04em;
+  color:var(--indigo);text-decoration:none;
+  transition:background var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out);
+}
+.map-fullscreen-btn:hover{background:var(--indigo);color:var(--paper)}
+.map-fullscreen-btn span{display:inline-block}
+
+.route-detail{
+  margin-top:var(--space-4);padding:var(--space-3) var(--space-4) 0;
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  background:var(--paper-deep);
+}
+.route-detail h4{
+  font-family:var(--font-display);font-size:13.5px;font-weight:700;
+  color:var(--ink);margin-bottom:8px;letter-spacing:.04em;
+}
+.route-table{
+  width:100%;border-collapse:collapse;font-size:11.5px;min-width:760px;background:var(--paper);
+}
+.route-table th{
+  text-align:left;font-weight:600;font-size:10.5px;letter-spacing:.1em;color:var(--muted);
+  padding:8px 10px;border-bottom:var(--rule) solid var(--hair);background:var(--paper-deep);white-space:nowrap;
+}
+.route-table td{
+  padding:8px 10px;border-bottom:var(--rule) dashed var(--hair);vertical-align:top;color:var(--ink-soft);
+  line-height:1.55;
+}
+.route-table td b{color:var(--ink);font-weight:700}
+.route-table .yen{color:var(--indigo);font-weight:600;white-space:nowrap}
+.route-table tbody tr:hover{background:var(--paper-deep)}
+.route-note{
+  margin-top:8px;font-size:11.5px;color:var(--muted);line-height:1.7;
+  border-top:var(--rule) dashed var(--hair);padding-top:6px;
+}
+.route-note b{color:var(--ink)}
+@media (max-width:760px){
+  .route-detail{padding:var(--space-3) var(--space-3) 0}
+  .route-table-wrap,.route-detail{overflow-x:auto}
+  .route-table{min-width:680px}
+}
+
+/* ---------- 离线地图缩略图 + 灯箱 ---------- */
+.map-thumb-wrap{
+  margin-top:var(--space-3);
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  overflow:hidden;background:var(--paper-deep);
+}
+.map-thumb{
+  position:relative;background:var(--paper);cursor:zoom-in;
+  transition:opacity var(--dur-1) var(--ease-out);
+}
+.map-thumb:hover{opacity:.96}
+.map-thumb svg{width:100%;height:auto;display:block}
+.map-zoom-btn{
+  display:block;width:100%;padding:12px 16px;text-align:center;
+  background:var(--paper);border:0;border-top:var(--rule) solid var(--hair);
+  font-family:var(--font-display);font-size:13.5px;font-weight:700;letter-spacing:.04em;
+  color:var(--indigo);cursor:pointer;
+  transition:background var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out);
+}
+.map-zoom-btn:hover{background:var(--indigo);color:var(--paper)}
+/* Leaflet 地图容器 */
+#map-hakodate-canvas,#map-sapporo-canvas{
+  border-radius:2px;z-index:1;
+  background:#eee;
+}
+@media (max-width:640px){
+  #map-hakodate-canvas,#map-sapporo-canvas{height:210px !important}
+}
+.leaflet-popup-content-wrapper{border-radius:3px;font-family:var(--font-body);font-size:12.5px}
+.leaflet-tooltip{border-radius:2px;font-size:12px;padding:3px 7px}
+.map-pin{background:transparent;border:none}
+.map-pin svg{display:block}
+/* 加载失败覆盖层（点击重试） */
+.map-error-overlay{
+  position:absolute;inset:0;z-index:500;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  background:var(--paper);text-align:center;padding:16px;
+}
+.map-error-overlay .map-err-msg{font-size:13px;color:#A63D2F;line-height:1.8}
+.map-error-overlay .map-err-retry{
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.04em;
+  color:var(--paper);background:var(--indigo);padding:8px 22px;border-radius:999px;
+}
+/* 全屏模式：整屏都是地图，退出/复位按钮浮动右上角 */
+.map-thumb-wrap.map-fullscreen{
+  position:fixed;inset:0;z-index:300;
+  border-radius:0;border:0;margin:0;
+  background:var(--paper);
+}
+.map-thumb-wrap.map-fullscreen .map-hint{display:none}
+.map-thumb-wrap.map-fullscreen #map-hakodate-canvas,
+.map-thumb-wrap.map-fullscreen #map-sapporo-canvas{
+  height:100vh !important;   /* 压过内联 260px 与手机端 210px !important */
+  height:100dvh !important;  /* 支持动态视口的浏览器（iOS 地址栏收放更准） */
+  border-radius:0;
+}
+.map-thumb-wrap.map-fullscreen .map-zoom-btn{
+  position:fixed;top:calc(116px + env(safe-area-inset-top,0px));right:14px;left:auto;bottom:auto;
+  width:112px;padding:10px 0;text-align:center;border-radius:999px;border:0;
+  background:rgba(28,32,38,.85);color:#fff;
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.05em;
+  box-shadow:0 2px 12px rgba(0,0,0,.3);z-index:1000;cursor:pointer;
+}
+.map-thumb-wrap.map-fullscreen .map-zoom-btn:hover{background:rgba(28,32,38,.95);color:#fff}
+/* 复位视角按钮：仅全屏时显示 */
+.map-reset-btn{display:none}
+.map-thumb-wrap.map-fullscreen .map-reset-btn{
+  display:block;position:fixed;top:calc(68px + env(safe-area-inset-top,0px));right:14px;
+  width:112px;padding:10px 0;text-align:center;border-radius:999px;border:var(--rule) solid var(--hair);
+  background:rgba(247,246,241,.94);color:var(--indigo);
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.04em;
+  box-shadow:0 2px 8px rgba(0,0,0,.22);z-index:1000;cursor:pointer;
+}
+.map-thumb-wrap.map-fullscreen .map-reset-btn:hover{background:var(--indigo);color:var(--paper)}
+.map-hint{
+  font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.7;padding:0 2px;
+}
+
+/* Lightbox 灯箱 */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+}
+.lightbox[hidden]{display:none}
+.lightbox-backdrop{
+  position:absolute;inset:0;background:oklch(20% 0.01 95 / .82);
+  backdrop-filter:blur(4px);cursor:zoom-out;
+}
+.lightbox-content{
+  position:relative;max-width:96vw;max-height:92vh;
+  background:var(--paper);border:var(--rule) solid var(--hair);border-radius:6px;
+  padding:14px;display:flex;flex-direction:column;gap:10px;
+  box-shadow:0 16px 60px oklch(15% 0.01 95 / .35);
+}
+.lightbox-close{
+  position:absolute;top:10px;right:10px;z-index:10;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--paper-deep);border:var(--rule) solid var(--hair);
+  font-size:18px;font-weight:600;line-height:1;color:var(--ink);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out);
+}
+.lightbox-close:hover{background:var(--seal);color:var(--paper)}
+.lightbox-panzoom{
+  position:relative;overflow:hidden;cursor:grab;
+  background:repeating-conic-gradient(var(--paper) 0 25%,var(--paper-deep) 0 50%) 0/16px 16px;
+  width:min(94vw,1100px);height:min(74vh,640px);
+  border:var(--rule) solid var(--hair);border-radius:4px;
+  touch-action:none;user-select:none;
+}
+.lightbox-panzoom.is-grabbing{cursor:grabbing}
+.lightbox-panzoom svg{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  transform-origin:0 0;transition:none;
+}
+.lightbox-tools{
+  display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+  padding-top:4px;border-top:var(--rule) dashed var(--hair);
+}
+.lb-btn{
+  padding:6px 14px;font-size:12px;font-family:var(--font-display);
+  background:var(--paper-deep);border:var(--rule) solid var(--hair);
+  border-radius:3px;color:var(--ink);cursor:pointer;
+  transition:background var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out);
+}
+.lb-btn:hover{background:var(--indigo);color:var(--paper)}
+.lb-hint{margin-left:auto;font-size:11px;color:var(--muted)}
+@media (max-width:640px){
+  .lightbox-content{padding:10px;max-width:100vw;max-height:100vh;border-radius:0}
+  .lightbox-panzoom{width:calc(100vw - 20px);height:calc(100vh - 110px)}
+}
+
+.map-legend{
+  margin-top:var(--space-3);padding:var(--space-3) var(--space-4);
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  background:var(--paper-deep);
+}
+.map-legend h4{
+  font-family:var(--font-display);font-size:12px;letter-spacing:.25em;
+  color:var(--indigo);font-weight:700;margin-bottom:8px;
+}
+.legend-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 14px;
+  font-size:12px;color:var(--ink-soft);
+}
+.legend-grid>div{display:flex;align-items:center;gap:8px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:var(--rule) solid var(--hair);flex:none}
+.dot-sight{background:#31465C}
+.dot-food{background:#A63D2F}
+.dot-stay{background:#A63D2F;border-color:#A63D2F}
+.line{display:inline-block;width:22px;height:0;flex:none;border-top:2px solid var(--muted)}
+.line-jr{border-top:2px solid #C2BFB4}
+.line-tram{border-top:2px dashed #C2BFB4}
+.line-walk{border-top:2px dotted #5B636A}
+.line-metro-s{border-top:2.5px solid #A63D2F}
+.line-metro-t{border-top:2px solid #31465C}
+.line-chika{border-top:6px solid #A63D2F;background:repeating-linear-gradient(90deg,#A63D2F 0 3px,transparent 3px 7px);height:0}
+.download-steps{
+  margin-top:var(--space-3);padding:var(--space-4);
+  border-left:3px solid var(--indigo);border-radius:var(--radius);
+  background:var(--paper-deep);
+}
+.download-steps h4{
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  color:var(--ink);margin-bottom:8px;letter-spacing:.05em;
+}
+.download-steps ol{padding-left:20px;line-height:1.85;color:var(--ink-soft);font-size:12.5px}
+.download-steps ol li{margin-bottom:4px}
+.download-steps ol li b{color:var(--ink)}
+.download-steps .hint{
+  font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.7;
+  border-top:var(--rule) dashed var(--hair);padding-top:6px;
+}
+.tk-tickets{counter-reset:tk 0;margin:0;padding:0;list-style:none}
+.ticket{
+  position:relative;
+  border:var(--rule) solid var(--hair);border-radius:2px;
+  background:
+    repeating-linear-gradient(180deg,transparent 0,transparent 5px,oklch(50% 0 0 / .018) 5px,oklch(50% 0 0 / .018) 6px),
+    var(--paper-deep);
+  margin-top:8px;padding:16px 14px 16px 14px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:baseline;
+  counter-increment:tk;
+  overflow:hidden;
+}
+/* 票种小角标（左上 · 黑底白字） */
+.ticket::before{
+  content:attr(data-mode);
+  position:absolute;top:0;left:0;
+  font-family:var(--font-display);font-weight:700;
+  font-size:8.5px;letter-spacing:.18em;color:var(--paper);
+  background:var(--ink);padding:2px 6px 1.5px 5px;
+  border-bottom-right-radius:2px;line-height:1.2;z-index:3;
+}
+/* 票号（右下 · 仿"印"风格） */
+.ticket::after{
+  content:"№ " counter(tk,decimal-leading-zero);
+  position:absolute;bottom:3px;right:8px;
+  font-family:var(--font-display);font-weight:700;
+  font-size:8.5px;letter-spacing:.12em;color:var(--indigo);
+  font-variant-numeric:tabular-nums;z-index:3;
+}
+/* 朱色印章（票种角标正下方 · 旋转贴边） */
+.ticket .tk-seal{
+  position:absolute;top:20px;left:6px;
+  font-family:var(--font-display);font-weight:900;
+  font-size:9px;letter-spacing:.04em;color:var(--seal);
+  border:1.2px solid var(--seal);border-radius:2px;
+  padding:1px 3px 0;line-height:1;transform:rotate(-2deg);
+  background:oklch(98% 0.005 95 / .7);opacity:.85;z-index:3;
+  pointer-events:none;
+}
+.tk-main{min-width:0;padding-top:10px}
+.tk-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.tk-row--top{position:relative;min-height:22px;align-items:center;padding-right:80px}
+.tk-row--top .tk-route{line-height:1.3}
+.tk-row--bot{font-size:10.5px;color:var(--muted);padding-right:80px}
+.tk-route{
+  font-family:var(--font-display);font-weight:700;font-size:12.5px;
+  letter-spacing:.02em;flex:1;min-width:0;
+}
+.tk-route i{font-style:normal;color:var(--indigo);margin:0 4px;font-family:var(--font-body)}
+.tk-price{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-weight:900;font-size:18px;
+  color:var(--seal);letter-spacing:.02em;white-space:nowrap;
+  text-align:right;line-height:1;z-index:1;
+}
+.tk-mode{
+  font-size:10.5px;color:var(--muted);letter-spacing:.02em;flex:1;min-width:0;
+}
+.tk-time{
+  font-size:10.5px;color:var(--muted);letter-spacing:.02em;flex:none;white-space:nowrap;
+  max-width:52%;overflow:hidden;text-overflow:ellipsis;text-align:right;
+}
+@media (max-width:640px){
+  .ticket{grid-template-columns:1fr;padding-bottom:18px}
+  .tk-row--top{display:block;padding-right:0;min-height:auto}
+  .tk-row--top .tk-price{position:static;transform:none;display:inline-block;margin-left:8px;vertical-align:baseline}
+  .tk-route,.tk-mode{flex:1 0 100%}
+}
+
+/* ---------- Day4 Tabs ---------- */
+.tabs{display:flex;gap:8px;margin-top:var(--space-3);flex-wrap:wrap}
+.tab{
+  appearance:none;border:var(--rule) solid var(--hair);background:var(--paper-deep);
+  color:var(--muted);font-family:var(--font-body);font-size:13px;letter-spacing:.08em;
+  padding:8px 18px;border-radius:2px;cursor:pointer;
+  transition:all var(--dur-1) var(--ease-out);
+}
+.tab:hover{border-color:var(--indigo);color:var(--indigo)}
+.tab:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.tab[aria-selected="true"]{
+  background:var(--indigo);border-color:var(--indigo);color:var(--paper);font-weight:500;
+}
+.tab-panel{margin-top:var(--space-3)}
+.tab-panel[hidden]{display:none}
+.panel-tag{
+  font-size:11px;letter-spacing:.3em;color:var(--indigo);font-weight:500;
+  margin-bottom:var(--space-2);display:block;
+}
+.panel-lead{color:var(--muted);font-size:13px;margin-bottom:var(--space-2);max-width:75ch}
+
+/* ---------- 美食 / 伴手礼 / 避雷 ---------- */
+.food-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-4);margin-top:var(--space-3)}
+.food-city h3{
+  font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:.1em;
+  padding-bottom:8px;border-bottom:var(--rule) solid var(--hair);margin-bottom:4px;
+  display:flex;align-items:baseline;gap:10px;
+}
+.food-city h3 small{font-size:10.5px;color:var(--muted);font-weight:400;letter-spacing:.25em}
+.dish{padding:12px 0;border-bottom:var(--rule) dashed var(--hair)}
+.dish:last-child{border-bottom:none}
+.dish h4{font-size:14px;font-weight:500;letter-spacing:.03em}
+.dish h4 .price{color:var(--indigo);font-size:12px;font-weight:500;margin-left:10px;letter-spacing:.03em}
+.dish p{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.75}
+
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-3);margin-top:var(--space-3)}
+.shop{
+  border:var(--rule) solid var(--hair);border-radius:var(--radius);
+  padding:var(--space-4) var(--space-5);background:var(--paper-deep);
+}
+.shop h4{font-family:var(--font-display);font-size:15.5px;font-weight:700}
+.shop h4 .price{font-family:var(--font-body);color:var(--indigo);font-size:12px;font-weight:500;margin-left:10px}
+.shop .meta-line{font-size:11px;color:var(--seal);margin-top:4px;letter-spacing:.06em;font-weight:500}
+.shop .meta-line.safe{color:var(--indigo)}
+.shop p{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.8}
+.shop p b{color:var(--ink-soft);font-weight:500}
+
+.avoid-list{list-style:none;margin-top:var(--space-5)}
+.avoid-list li{
+  display:grid;grid-template-columns:26px minmax(0,1fr);gap:var(--space-4);
+  padding:var(--space-3) 0;border-bottom:var(--rule) dashed var(--hair);
+}
+.avoid-list li:last-child{border-bottom:none}
+.avoid-no{
+  font-family:var(--font-display);font-weight:900;color:var(--seal);
+  font-size:15px;padding-top:2px;
+}
+.avoid-list h4{font-size:14.5px;font-weight:500}
+.avoid-list p{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.8}
+.avoid-list p b{color:var(--seal);font-weight:500;font-size:11px;letter-spacing:.2em;margin-right:8px}
+
+/* ---------- 预算 ---------- */
+.budget-note{
+  margin-top:var(--space-4);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-3);
+}
+.bn{border-left:2px solid var(--indigo);padding:4px 0 4px 14px}
+.bn b{font-family:var(--font-display);font-size:19px;font-weight:900;display:block}
+.bn b i{font-style:normal;font-size:.62em;color:var(--indigo);margin-left:2px}
+.bn small{color:var(--muted);font-size:11.5px;letter-spacing:.05em}
+
+/* ---------- 来源 & 页脚 ---------- */
+.src-list{list-style:none;margin-top:var(--space-4);columns:2;column-gap:var(--space-6)}
+@media (max-width:640px){.src-list{columns:1}}
+.src-list li{
+  font-size:12px;color:var(--muted);padding:4px 0;break-inside:avoid;line-height:1.7;
+}
+.src-list a{color:var(--indigo);text-decoration:none;border-bottom:1px solid var(--ice)}
+.src-list a:hover{border-bottom-color:var(--indigo)}
+.src-list a:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.src-list small{color:var(--muted)}
+footer{
+  max-width:1060px;margin:0 auto;padding:var(--space-6) clamp(16px,4vw,40px) var(--space-7);
+  border-top:var(--rule) solid var(--hair);color:var(--muted);font-size:11.5px;
+  display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap;letter-spacing:.05em;
+}
+.disclaimer{
+  margin-top:var(--space-4);font-size:11.5px;color:var(--muted);line-height:1.8;
+  padding:10px 14px;border:var(--rule) dashed var(--hair);border-radius:var(--radius);
+}
+
+/* ---------- 打印 ---------- */
+@media print{
+  #snow,.topbar{display:none}
+  .tab-panel[hidden]{display:block!important}
+  body{background:#fff}
+  section{page-break-inside:avoid;padding:20px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<nav class="topbar" aria-label="页面索引">
+  <span class="brand">雪国 · 北海道</span>
+  <a class="toc-btn" href="#toc">目次</a>
+  <div class="toplinks">
+    <a href="#before">行前须知</a><span class="sep">·</span>
+    <a href="#route">路线总览</a><span class="sep">·</span>
+    <a href="#map-hakodate">函馆地图</a><span class="sep">·</span>
+    <a href="#day1">Day 1</a><span class="sep">·</span>
+    <a href="#day2">Day 2</a><span class="sep">·</span>
+    <a href="#map-sapporo">札幌地图</a><span class="sep">·</span>
+    <a href="#day3">Day 3</a><span class="sep">·</span>
+    <a href="#day4">Day 4 三方案</a><span class="sep">·</span>
+    <a href="#day5">Day 5</a><span class="sep">·</span>
+    <a href="#food">美食</a><span class="sep">·</span>
+    <a href="#omiyage">伴手礼</a><span class="sep">·</span>
+    <a href="#avoid">避雷</a><span class="sep">·</span>
+    <a href="#budget">预算</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="hero-eyebrow">Hokkaido · Winter Route · Jan 2027</span>
+    <p class="sub">北海道五天四晚 —— 函馆进，札幌出</p>
+    <blockquote class="hero-quote"><span class="q">「</span>穿过县界长长的隧道，便是雪国。夜空下一片白茫茫。<span class="q">」</span><span class="src">—— 川端康成《雪国》</span></blockquote>
+    <div class="hero-meta">
+      <span>2027年1月下旬出发</span>
+      <span>函馆机场进 · 新千岁机场出</span>
+      <span>函馆2天 + 札幌圈3天</span>
+      <span>不含住宿（按需自定）</span>
+    </div>
+  </div>
+  <div class="hero-side" aria-hidden="true">
+    <span class="vtext">雪国を行く・北の道五日</span>
+    <span class="seal">雪国</span>
+  </div>
+</header>
+
+<div class="hero-stats">
+  <div class="hstat"><b>约 600 <i>km</i></b><small>函馆 → 札幌 → 旭川·美瑛 全程移动距离</small></div>
+  <div class="hstat"><b>≈17:00 <i>日落</i></b><small>函馆/札幌1月底日落约16:50–17:00</small></div>
+  <div class="hstat"><b>−8 ℃<i>体感</i></b><small>函馆山顶与美瑛夜间的常态体感</small></div>
+  <div class="hstat"><b>5.4–7.4万 <i>日元</i></b><small>人均总预算（不含机票住宿），折合人民币2,300–3,150元</small></div>
+  <div class="hstat"><b>6:00–14:00 <i>朝市</i></b><small>函馆朝市多数店铺营业时段，14:00后陆续收摊</small></div>
+  <div class="hstat"><b>日10班 <i>北斗</i></b><small>特急北斗 函馆↔札幌每日往返班次</small></div>
+  <div class="hstat"><b>2027年4月<i>¥1,400</i></b><small>旭山动物园调价后，1月底去是最后¥1,000窗口</small></div>
+</div>
+
+<div class="fx-card">
+  <div class="fx-box">
+    <div class="fx-head">
+      <span class="tag">汇率基准</span>
+      <b>100 日元 ≈ 4.32 元人民币</b>
+      <small>1 元人民币 ≈ 23.2 日元 · 中国外汇交易中心 2026年9月18日中间价</small>
+    </div>
+    <div class="fx-quick">
+      <span>1,000 日元 ≈ 43 元</span>
+      <span>5,000 日元 ≈ 216 元</span>
+      <span>10,000 日元 ≈ 432 元</span>
+      <span>50,000 日元 ≈ 2,159 元</span>
+    </div>
+    <p class="fx-note">本页所有「¥」符号均指日元（JPY）；人民币换算按上表汇率四舍五入，实际支付以银行/支付宝当日实时牌价为准，出发前建议再查一次。</p>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ 目录 ============ -->
+<nav class="toc" id="toc" aria-label="页面目录">
+  <div class="toc-col">
+    <h3>行程</h3>
+    <ul>
+      <li><a href="#map-hakodate"><span>📍 函馆地图</span><small>景点 · 美食 · 商店标注</small></a></li>
+      <li><a href="#day1"><span>Day 1 · 函馆 元町与夜景</span><small>元町 / 函馆山</small></a></li>
+      <li><a href="#day2"><span>Day 2 · 函馆 五棱郭与猴子温泉</span><small>五棱郭 / 六花亭 / 汤之川</small></a></li>
+      <li><a href="#map-sapporo"><span>📍 札幌地图</span><small>景点 · 美食 · 商店标注</small></a></li>
+      <li><a href="#day3"><span>Day 3 · 移动日 + 札幌</span><small>北斗号 / 二条市场</small></a></li>
+      <li><a href="#day4"><span>Day 4 · 札幌周边 三选一</span><small>旭川 / 美瑛 / 小樽</small></a></li>
+      <li><a href="#day5"><span>Day 5 · 新千岁机场返程</span><small>补货 / 机场扫货</small></a></li>
+    </ul>
+  </div>
+  <div class="toc-col">
+    <h3>攻略</h3>
+    <ul>
+      <li><a href="#before"><span>行前须知</span><small>八件事</small></a></li>
+      <li><a href="#route"><span>路线总览与交通总表</span><small>票价 · 购票方式</small></a></li>
+      <li><a href="#food"><span>美食清单</span><small>人均与理由</small></a></li>
+      <li><a href="#omiyage"><span>必买清单</span><small>保质期 · 在哪买</small></a></li>
+      <li><a href="#avoid"><span>避雷合集</span><small>13条</small></a></li>
+      <li><a href="#budget"><span>预算估算</span><small>人均</small></a></li>
+      <li><a href="#sources"><span>数据来源</span><small>官方链接</small></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ 行前须知 ============ -->
+<section id="before">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">00 · BEFORE DEPARTURE</span>
+      <h2>行前须知<small>出发前必须知道的八件事</small></h2>
+      <p class="sec-intro">每一条都对应冬季北海道的真实坑位，不是套话。</p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">旅の前に読む六箇条</span>
+  </div>
+  <div class="prep-grid">
+    <div class="prep"><h3><b>其一</b>保暖三层 + 防滑雪靴</h3><p>发热内衣＋毛衣＋防风羽绒服，帽子手套围巾必备，鞋底要防水防滑。理由：函馆1月底均温 −3～−8℃，海边风大体感更低；路面结冰（アイスバーン）是常态而非意外，摔一跤的代价远大于一双鞋。可再备简易冰爪，便利店和车站有售。</p></div>
+    <div class="prep"><h3><b>其二</b>现金备足 ¥30,000/人</h3><p>7-11 ATM 支持银联/支付宝取现。理由：函馆朝市、拉面老铺、道北巴士（旭川·美瑛方向）基本只收现金；札幌的地铁与JR可刷手机Suica/Kitaca，但进入函馆与旭川后依然以现金为主——这是冬季自由行最常见的卡壳点。</p></div>
+    <div class="prep"><h3><b>其三</b>JR特急全车指定席</h3><p>2026年3月起北海道所有特急取消自由席，无指定席券＝无座。理由：北斗号（函馆→札幌）4小时车程全程站立不可想象；指定席可通过「えきねっと」APP或绿色窗口、指定席售票机购买，提前14天买「トクだ値14」最高省30%。</p></div>
+    <div class="prep"><h3><b>其四</b>每晚查「運休」通知</h3><p>冬季大雪时JR特急和巴士会临时停运。理由：1月底是北海道降雪高峰，函馆→札幌的北斗号每年都有因雪停驶的班次；出发前一晚务必在JR北海道官网/APP确认次日首班车状态，并预留Plan B（高速巴士）。</p></div>
+    <div class="prep"><h3><b>其五</b>行程排早不排晚</h3><p>17:00前后天黑，餐厅21:00后陆续打烊。理由：冬季北海道的“有效白天”比想象中短——室外景点尽量排在16:00前，把夜景（17:30–19:00蓝调后）和室内活动（购物、居酒屋）留给傍晚之后。</p></div>
+    <div class="prep"><h3><b>其六</b>手机：防冻、电量、网络</h3><p>充电宝贴身放内袋，手机拍完立刻收进怀里回温；提前买好日本eSIM/流量卡，Google地图下载离线包。理由：−10℃户外手机电量会“跳水”甚至直接自动关机——导航、JR運休通知、拍夜景全指望它；eSIM比大陆漫游便宜且Google地图可用，雪天信号不稳时离线地图是最后的保险。</p></div>
+    <div class="prep"><h3><b>其七</b>签证与保险</h3><p>日本单次旅游签证需在职/资产材料，建议出发前6–8周办理；函馆机场（HKD）国际航线有限，从国内出发通常需经东京羽田/大阪或新千岁中转，个别城市有季节包机。旅行保险建议覆盖航班延误与行李——冬季北海道因雪取消/延误航班是常态。</p></div>
+    <div class="prep"><h3><b>其八</b>札幌地下城 チカガ（Chikagai）</h3><p>札幌站 JR塔 → 大通公园 → 大丸 → 薄野，整条 <b>南北线</b> 都在地下连通——札幌站一侧连 <b>ESTA / JR塔 / 大丸百货 / ステラプレイス / APIA / さっぽろ地下街</b>，大通一侧连 <b>大丸 / 丸井今井 / 三越</b>，薄野侧直达 <b>cocono / 角屋 / 拉面横丁</b>。从札幌站北口开始步行能一路地下走到薄野，全程 <b>约 1.5 km · 20–25 分</b>，中间不下地面、不怕雪、不怕拉行李。理由：1月底札幌路面常态结冰 + 频繁暴风雪，白天在户外走 5 分钟就冻僵；地下城 <b>有暖气、有热水洗手台、有厕所、有咖啡店</b>，是大通↔薄野移动的真正主干道——也是本攻略 Day 3 城市漫步的「隐藏捷径」。<b>站名区分</b>：JR 用「札幌」，地铁用假名「さっぽろ」，站内指示牌全部都标。</p><a class="xhs" href="https://xhslink.cn/o/5NxJxDd4l52" target="_blank" rel="noopener">看原帖：札幌地下城——范围比预想大<span class="ar">↗</span></a></div>
+  </div>
+</section>
+
+<!-- ============ 路线总览 ============ -->
+<section id="route">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">01 · ROUTE MAP</span>
+      <h2>路线总览<small>函馆 → 札幌 → 周边</small></h2>
+      <p class="sec-intro">主干：函馆（2天）— 特急北斗 — 札幌（3天，其中一天在 旭川 / 美瑛 / 小樽 中三选一）。最后从新千岁机场飞离。</p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">北の道・全行程</span>
+  </div>
+
+  <svg class="route-svg" viewBox="0 0 960 400" role="img" aria-label="路线示意图（非真实比例，方位参考真实地图）：函馆在最南端，经特急北斗沿西岸北上至札幌；新千岁机场在札幌以南（千岁方向）的支线上；小樽在札幌以西，旭川在东北方向，美瑛在旭川以东">
+    <!-- 铁路轨迹：先浅底后虚线（上北下南，方位贴近真实地图） -->
+    <g stroke="#DCD8CF" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M 140 340 C 250 340 330 295 378 246 C 410 212 440 178 470 150"/>
+      <path d="M 388 240 L 440 268"/>
+      <path d="M 470 150 C 410 128 330 104 250 82"/>
+      <path d="M 470 150 C 545 128 618 98 690 72"/>
+      <path d="M 700 80 C 765 96 812 112 848 130"/>
+    </g>
+    <g stroke="#31465C" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6" opacity=".85">
+      <path d="M 140 340 C 250 340 330 295 378 246 C 410 212 440 178 470 150"/>
+      <path d="M 388 240 L 440 268"/>
+      <path d="M 470 150 C 410 128 330 104 250 82"/>
+      <path d="M 470 150 C 545 128 618 98 690 72"/>
+      <path d="M 700 80 C 765 96 812 112 848 130"/>
+    </g>
+    <!-- 城市节点 -->
+    <g>
+      <circle cx="140" cy="340" r="7" fill="#31465C"/>
+      <circle cx="140" cy="340" r="12" fill="none" stroke="#31465C" stroke-opacity=".3"/>
+      <circle cx="470" cy="150" r="7" fill="#31465C"/>
+      <circle cx="470" cy="150" r="12" fill="none" stroke="#31465C" stroke-opacity=".3"/>
+      <circle cx="440" cy="268" r="6" fill="#A63D2F"/>
+      <circle cx="250" cy="82" r="6" fill="#31465C"/>
+      <circle cx="690" cy="72" r="6" fill="#31465C"/>
+      <circle cx="848" cy="130" r="6" fill="#31465C"/>
+    </g>
+    <!-- 城市名 -->
+    <g fill="#23272C" font-size="16">
+      <text x="140" y="376" class="rs-city" font-size="18" text-anchor="middle">函館</text>
+      <text x="470" y="128" class="rs-city" font-size="18" text-anchor="middle">札幌</text>
+      <text x="440" y="296" class="rs-city" font-size="16" text-anchor="middle">新千歳空港</text>
+      <text x="250" y="58" class="rs-city" font-size="16" text-anchor="middle">小樽</text>
+      <text x="690" y="48" class="rs-city" font-size="16" text-anchor="middle">旭川</text>
+      <text x="848" y="158" class="rs-city" font-size="16" text-anchor="middle">美瑛</text>
+    </g>
+    <!-- 英文注记 -->
+    <g fill="#7B8188" font-size="10.5" letter-spacing="2">
+      <text x="140" y="394" text-anchor="middle">HAKODATE · 2 DAYS</text>
+      <text x="302" y="198" text-anchor="middle">SAPPORO · 3 DAYS</text>
+      <text x="440" y="318" text-anchor="middle">DEPARTURE</text>
+      <text x="470" y="68" text-anchor="middle" letter-spacing="1">↑ 北 N</text>
+    </g>
+    <!-- 区间标注 -->
+    <g fill="#31465C" font-size="11.5">
+      <text x="245" y="292" text-anchor="middle">特急北斗 · 约3h45m</text>
+      <text x="245" y="310" text-anchor="middle" fill="#7B8188">¥9,770 · 全车指定席</text>
+      <text x="452" y="248" text-anchor="start" font-size="10.5">快速エアポート · 约37m · ¥1,230</text>
+      <text x="560" y="92" text-anchor="middle">ライラック 1h28m</text>
+      <text x="560" y="108" text-anchor="middle" fill="#7B8188">¥5,440</text>
+      <text x="770" y="92" text-anchor="middle" font-size="10.5">富良野線 34m · ¥250</text>
+      <text x="352" y="100" text-anchor="middle" font-size="10.5">快速 34m · ¥750</text>
+    </g>
+    <text x="930" y="380" text-anchor="end" fill="#B9C2C9" font-size="10">示意图 · 非真实比例</text>
+  </svg>
+
+  <div class="table-wrap" style="margin-top:var(--space-4)">
+    <table>
+      <thead><tr><th>日</th><th>主题</th><th>核心内容</th><th>主要交通（日元）</th></tr></thead>
+      <tbody>
+        <tr class="day-row" data-anchor="day1"><td><a class="day-jump" href="#day1"><b>Day 1</b></a></td><td>函馆 · 元町与夜景</td><td>朝市/幸运小丑 · 八幡坂 · 金森红砖仓库 · 函馆山世界三大夜景</td><td class="yen">机场巴士 ¥700 · 市电</td></tr>
+        <tr class="day-row" data-anchor="day2"><td><a class="day-jump" href="#day2"><b>Day 2</b></a></td><td>函馆 · 五棱郭与汤之川</td><td>朝市海鲜早餐 · 五棱郭塔 · 六花亭 · 猴子泡温泉</td><td class="yen">市电 1日券 ¥800</td></tr>
+        <tr class="day-row" data-anchor="day3"><td><a class="day-jump" href="#day3"><b>Day 3</b></a></td><td>移动日 + 札幌</td><td>特急北斗北上 · 二条市场 · 大通公园 · 成吉思汗烤肉</td><td class="yen">北斗号 ¥9,770</td></tr>
+        <tr class="day-row" data-anchor="day4"><td><a class="day-jump" href="#day4"><b>Day 4</b></a></td><td>札幌周边 · 三选一</td><td>A 旭川（企鹅散步）／ B 美瑛（青池）／ C 小樽</td><td class="yen">ライラック ¥5,440 等</td></tr>
+        <tr class="day-row" data-anchor="day5"><td><a class="day-jump" href="#day5"><b>Day 5</b></a></td><td>返程 · 新千岁机场</td><td>市区补货 · 机场扫货（Royce' 等）· 起飞</td><td class="yen">快速エアポート ¥1,230</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>区间</th><th>方式</th><th>时间</th><th>票价（日元）</th><th>购票方法</th></tr></thead>
+      <tbody>
+        <tr><td><b>函馆机场 → 函馆站前</b></td><td>机场接驳巴士（3号乘车场）</td><td>约20分</td><td class="yen">¥700</td><td>下车付现金/IC；省钱可选96号巴士 ¥340（约33分绕路）</td></tr>
+        <tr><td><b>函馆市内</b></td><td>市电（路面电车）</td><td>—</td><td class="yen">单程¥250–300</td><td>下车投币/IC；<b>1日券¥800</b>（观光咨询处/车内购，乘3次以上回本）</td></tr>
+        <tr><td><b>函馆 → 札幌</b></td><td>JR特急北斗号</td><td>约3h45m</td><td class="yen">¥9,770</td><td>全车指定席：えきねっとAPP/绿色窗口；提前14天「トクだ値」最高省30%</td></tr>
+        <tr><td><b>（备选）函馆 → 札幌</b></td><td>高速巴士 はこだて号</td><td>约5h30m</td><td class="yen">¥3,820–5,360</td><td>官网/巴士窗口；北斗号雪天停运时的Plan B，票价按日期浮动</td></tr>
+        <tr><td><b>札幌 → 旭川</b></td><td>JR特急ライラック/カムイ</td><td>约1h28m</td><td class="yen">¥5,440</td><td>全车指定席，购票方法同上；另有高速巴士约2h ¥2,200–3,300</td></tr>
+        <tr><td><b>旭川 → 美瑛</b></td><td>JR富良野线（普通）</td><td>约34分</td><td class="yen">约¥250</td><td>自动售票机/IC卡即买即走</td></tr>
+        <tr><td><b>美瑛站 → 青池</b></td><td>道北巴士39/42号（白金温泉行）</td><td>约20–25分</td><td class="yen">约¥500</td><td>车内现金/感应支付；<b>班次极少</b>，务必先查好往返时刻</td></tr>
+        <tr><td><b>旭川站 → 旭山动物园</b></td><td>旭川电气轨道巴士41/47号</td><td>约40分</td><td class="yen">单程约¥500</td><td>道北巴士案内所/车内现金；冬季8:40–14:10每30分一班</td></tr>
+        <tr><td><b>札幌 → 小樽</b></td><td>JR快速エアポート等</td><td>约34–40分</td><td class="yen">¥750</td><td>售票机/IC即买即走，无需预约</td></tr>
+        <tr><td><b>札幌市内</b></td><td>市营地铁</td><td>—</td><td class="yen">单程¥210起</td><td>IC/售票机；1日券平日¥830、周末「ドニチカ」¥520</td></tr>
+        <tr><td><b>札幌站↔大通↔薄野</b></td><td>地下城 チカガ（步行）</td><td>约 20–25 分</td><td class="yen">免费</td><td>札幌站北口 → ステラ → 大丸 → 薄野 站，全段地下连通、有暖气；冬季雪天行李不需上路面，指示牌跟随「さっぽろ駅」</td></tr>
+        <tr><td><b>札幌 → 新千岁机场</b></td><td>JR快速エアポート</td><td>约37分</td><td class="yen">¥1,230</td><td>10–15分钟一班无需预约；4号车厢指定席另+¥1,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tbl-note">※ 上表票价均为<b>日元</b>（人民币换算见顶部汇率卡，¥9,770 ≈ 422元），为2026年8月查证时的成人单程价，2027年出发前请在各官网复核（旭山动物园门票2027年4月29日起才涨至¥1,400，1月底去仍为¥1,000）。JR北海道特急自2026年3月14日起全车指定席化。</p>
+  <p class="tbl-note" style="margin-top:6px">可选参考：<b>北海道铁路周游券</b>（HOKKAIDO RAIL PASS，5日约¥22,000，以官网为准）——Day 4选旭川或美瑛时接近回本（单买合计约¥22,000–22,400）；选小樽方案则明显不划算，逐段买票即可。</p>
+</section>
+
+<!-- ============ 函馆离线地图 ============ -->
+<section id="map-hakodate">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">00a · HAKODATE MAP</span>
+      <h2>函馆地图<small>街道地图 · 机场/站点/景点标记</small></h2>
+      <p class="sec-intro">覆盖<b>函馆市区</b>（函馆山 → 五棱郭 → 汤之川），范围已锁定。图例：火车头 = JR站｜公交 = 市电｜★ = 景点｜蓝/红圆底 = 购物/美食｜F = 机场。点击地图即可全屏查看（谷歌真实街道图，需联网）。</p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">函館の地図</span>
+  </div>
+
+  <div class="map-thumb-wrap">
+    <div id="map-hakodate-canvas" style="width:100%;height:260px;background:#eee"></div>
+    <button class="map-zoom-btn" data-map="hakodate">⛶ 全屏查看</button>
+    <button class="map-reset-btn" data-map="hakodate" type="button">⌖ 回初始视野</button>
+  </div>
+
+  
+  
+  <div class="download-steps">
+    <h4>📥 出行离线保障（出发前 1 天 · 2 分钟）</h4>
+    <p class="hint">本页地图：有网 = 真实街道图；无网 = 自动切内置矢量图。<b>断网可导航</b>的只有下面这一步：</p>
+    <ol>
+      <li><b>手机 Google Maps App</b> → 搜「函館市」/「札幌市」→ 点底部地点卡片 → 选<b>「下载离线地图」</b></li>
+      <li><b>框选范围</b>：函馆含五棱郭/汤之川/函馆山；札幌含白色恋人/新千岁空港 → 下载（有效期 30 天，过期连网点更新）</li>
+      <li><b>完成</b>：到日本断网也能看图、导航、搜地点（公交时刻需联网，建议截图）</li>
+    </ol>
+    <p class="hint">备用：MAPS.ME 下载日本全图（约 200 MB，无需翻墙）。</p>
+  </div>
+</section>
+
+<!-- ============ DAY 1 ============ -->
+<section id="day1">
+  <div class="day-head">
+    <div class="day-label">
+      <span class="eyebrow">Day 1 · Hakodate</span>
+      <h2>函馆<span>元町坡道与百万美元夜景</span></h2>
+      <p class="day-sub">落地即入雪国。一条不回头的下坡散步线（元町→金森红砖仓库），黄昏上函馆山，一次收齐日落、蓝调与夜景三个时刻。</p>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="tl-item">
+      <div class="tl-time">中午前后<small>落地后</small></div>
+      <div class="tl-body">
+        <h4>函馆机场 → 市区<span class="jp">函館空港</span></h4>
+        <div class="ticket" data-mode="BUS">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">函館空港<i>→</i>函館駅前</span>
+              <span class="tk-price">¥700</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">机场接驳巴士 · 3号乘车场</span>
+            </div>
+          </div>
+        </div>
+        <p class="reason"><b>理由</b>函馆机场无轨道线，接驳巴士是最快进市区的方式；省钱可选96号路线巴士（¥340，约33分钟）或8号快速（¥500），但班次少于接驳巴士，落地即走的便利性优先。</p>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">12:00–14:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>朝市海鲜丼 或 幸运小丑汉堡<span class="jp">はこだて朝市 / ラッキーピエロ</span></h4>
+        <p>若14:00前能到，去<b>函馆朝市</b>吃海鲜盖饭（朝市就在函馆站旁）；否则去金森仓库附近的<b>幸运小丑（Lucky Pierrot）湾景区本店</b>，中文菜单，汉堡约¥600–800。</p>
+        <p class="reason"><b>理由</b>朝市店铺14:00后陆续收摊是硬约束，落地时间决定二选一；幸运小丑多次在全日本汉堡评比中拿过第一、本地人格外出没，是“落地的第一顿”最稳的选择。</p>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>幸运小丑 ベイエリア本店</b>　末広町23-18（金森仓库旁）<span class="dist">距金森红砖仓库步行约2分 / 市电末広町站3分</span></p>
+          <p><b>函馆朝市</b>　若松町（函馆站西侧）<span class="dist">距函馆站步行约1分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">14:00–16:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>元町坡道群<span class="jp">元町 · 八幡坂</span></h4>
+        <p>路线：基坂 → <b>八幡坂</b> → 元町公园 → 旧函馆区公会堂 → 哈里斯托斯正教会 → 旧英国领事馆。一路下坡朝海走，终点自然衔接金森红砖仓库。</p>
+        <p class="reason"><b>理由</b>八幡坂是《名侦探柯南》取景地，坡道顶端能拍到“雪山＋大海＋市电”同框——函馆最经典的一张构图；规划成单向下坡线，冬季结冰路面不走回头路就是安全设计。</p>
+        <div class="rec"><b>推荐</b>旧英国领事馆免费参观，可在里面喝杯红茶暖身，是坡道线中段最好的室内休息点。</div>
+        <figure class="photo">
+          <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">八幡坂 · 雪山＋海＋市电同框</span></div>
+            <figcaption>对应你贴的笔记《冬季函馆四天三晚旅行攻略》等——把帖子截图保存后，用 <code>&lt;img&gt;</code> 替换这里即显示实图</figcaption>
+          </figure>
+          <a class="xhs" href="https://xhslink.cn/o/7wVkOT705ea" target="_blank" rel="noopener">看原帖：冬季函馆四天三晚旅行攻略<span class="ar">↗</span></a>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">15:30–16:30<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>金森红砖仓库群<span class="jp">金森赤レンガ倉庫</span></h4>
+        <p>旧仓库改造的商店群，逛二十分钟玻璃工房与伴手礼店；从八幡坂步行约7分钟即到。</p>
+        <p class="reason"><b>理由</b>红砖建筑在白雪映衬下是函馆最具代表性的地景之一，且室内为主——正好是上函馆山前暖身、等日落的填空时段。冬季周边有灯饰点缀。</p>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">16:00–18:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>函馆山展望台（世界三大夜景）<span class="jp">函館山ロープウェイ</span></h4>
+        <div class="ticket" data-mode="CABLE">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">市電・十字街<i>→</i>山麓駅<i>→</i>山頂</span>
+              <span class="tk-price">¥1,800</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">市电至十字街 → 步行10分 → 缆车约3分</span>
+            </div>
+          </div>
+        </div>
+        <p>15:40–16:00上山，看完日落（约16:55）→ 蓝调时刻（日落后20–30分钟，官方建议的最佳观赏窗口）→ 夜景全亮，约17:30–18:00下山。山顶气温常低于−8℃且风大，帽子手套全副武装。</p>
+        <p class="reason"><b>理由</b>与香港维多利亚港、那不勒斯并称世界三大夜景——沙漏形的城市灯火只有在这里看得完整；官方明示“最佳夜景=日落后30分钟”，所以一次上山同时收割日落与夜景两个时刻，比夜里单独上山值回票价。</p>
+        <div class="warn"><b>避雷</b>别听信“晚上8点再上去”：蓝调已过、缆车排长队、山顶冻透。周六人多，排队1小时起。缆车冬季营业10:00–21:00（上山末班20:30、下山末班21:00），别错过下山末班。预算紧可改乘函馆站前直达山顶的登山巴士（往复约¥800）替代缆车。</div>
+        <figure class="photo">
+          <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">函馆山 · 世界三大夜景（沙漏形灯火）</span></div>
+            <figcaption>对应你贴的笔记《函馆｜太幸福的四天》《函馆二日·把生活调回0.5倍速》等——截图后替换为 <code>&lt;img&gt;</code></figcaption>
+          </figure>
+          <a class="xhs" href="https://xhslink.cn/o/1I9NVKItCQX" target="_blank" rel="noopener">看原帖：函馆·太幸福的四天<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">附近 · 下山顺路</span>
+          <p><b>Soup Curry Begirama</b>　松風町10-2（A-GATE酒店1F）<span class="dist">距函馆站步行约10分 / 市电松風町站2分</span></p>
+          <p><b>幸运小丑 ベイエリア本店</b>　末広町23-18<span class="dist">距缆车山麓站步行约12分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">18:30–20:30<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>盐味拉面 或 大门横丁<span class="jp">塩ラーメン</span></h4>
+        <p>推荐五棱郭的<b>「麺厨房 あじさい」</b>盐味拉面（约¥900–1,100）；饭后若还有力气，去<b>大门横丁</b>的居酒屋小酌一杯收尾。</p>
+        <p class="reason"><b>理由</b>函馆是盐味拉面的发源地之一，清澈汤底配细直面，冷夜之后的暖身首选；あじさい是本地数十年的元祖级名店。大门横丁是函馆第一居酒屋横丁，离函馆站步行2分钟。</p>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>麺厨房 あじさい（五棱郭）</b>　五棱郭·本町一带<span class="dist">距函馆站市电约15分</span></p>
+          <p><b>大门横丁</b>　函馆站前<span class="dist">距函馆站步行约2分</span></p>
+        </div>
+      </div>
+    </li>
+  </ol>
+  <div class="rec"><b>灵活</b>本日程按上午落地设计。若下午才到：落地后直接去五棱郭塔+六花亭（塔营业至18:00），把元町散步与函馆山夜景整体移到Day 2——理由：塔的营业时间是硬约束，夜景对时间不敏感，怎么对调都不浪费。</div>
+</section>
+
+<!-- ============ DAY 2 ============ -->
+<section id="day2">
+  <div class="day-head">
+    <div class="day-label">
+      <span class="eyebrow">Day 2 · Hakodate</span>
+      <h2>函馆<span>五棱郭的雪中星形与泡温泉的猴子</span></h2>
+      <p class="day-sub">早市的海鲜早餐开胃，上午登塔看星形要塞、逛“最美六花亭”，下午去汤之川看猴子泡温泉——冬季限定。晚上收拾行李，明早出发去札幌。</p>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="tl-item">
+      <div class="tl-time">7:00–9:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>函馆朝市 海鲜丼早餐<span class="jp">はこだて朝市</span></h4>
+        <p>朝市就在函馆站旁步行1分钟。海鲜盖饭约¥2,000–3,000；海胆、蟹、扇贝铺满一碗。</p>
+        <p class="reason"><b>理由</b>7:00–9:00的朝市货最新鲜、人最少；14:00后店铺陆续收摊——所以把朝市排在Day 2清晨而不是落地那天下午，是这趟行程的关键取舍。想更进一步，去老铺「恵比寿屋食堂」看堆成小山的大碗。</p>
+        <a class="xhs" href="https://xhslink.cn/o/1ppgLZQ1S8Z" target="_blank" rel="noopener">看原帖：北海道吃的最好的两顿都在函馆<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">就在朝市里 · 不用挪窝</span>
+          <p><b>恵比寿屋食堂</b>　朝市内·若松町<span class="dist">距函馆站步行约1分</span></p>
+          <p><b>朝市生鱿鱼档口</b>　朝市通<span class="dist">新帖评论点名“函馆朝市的生鱿鱼”必吃</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">9:00–11:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>五棱郭塔 + 五棱郭公园<span class="jp">五稜郭タワー</span></h4>
+        <div class="ticket" data-mode="TRAM">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">函館駅前<i>→</i>五稜郭公園前</span>
+              <span class="tk-price">¥1,200</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">市电 · 约15分 + 步行13分到塔</span>
+            </div>
+          </div>
+        </div>
+        <p>登塔俯瞰星形要塞——1月底正值冬季点灯期「五稜星之梦」，约2000盏灯沿护城河铺开，雪中星形+灯带是函馆冬季限定的画面。</p>
+        <p class="reason"><b>理由</b>星形从地面完全看不出来（只是普通护城河），只有90米高的塔上才能辨认——这是“必登塔”的唯一硬理由；冬天雪覆星形+点灯，是全年最独特的版本。塔内有箱馆战争史料，对历史有兴趣可停留更久。</p>
+        <a class="xhs" href="https://xhslink.cn/o/12GJJRRySEa" target="_blank" rel="noopener">看原帖：函馆篇章1·满意得睡不着攻略<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>六花亭 五稜郭店</b>　五稜郭町27-6<span class="dist">距五棱郭塔步行约5分（下一站）</span></p>
+          <p><b>麺厨房 あじさい</b>　五棱郭·本町一带<span class="dist">距五棱郭塔步行约10分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">11:00–13:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>六花亭 五棱郭店<span class="jp">六花亭・五稜郭店</span></h4>
+        <p>就在五棱郭塔旁的白色洋房。店内自助<b>免费热咖啡</b>＋大方试吃；买招牌「マルセイバターサンド」（葡萄奶油夹心饼干，¥680起/4枚装）。午餐可在旁边的幸运小丑五棱郭店解决（大分量注意）。</p>
+        <p class="reason"><b>理由</b>这就是你在小红书遇到的那家“函馆最美六花亭”——洋楼庭院建筑+免费咖啡的体验全道仅此一家氛围最好。但注意：マルセイバターサンド<b>赏味期限只有制造起9–10天</b>，所以这里买的意义是“当下吃＋前两天吃”，送人的量留到旅程最后在新千岁机场补齐。</p>
+        <div class="warn"><b>避雷</b>别在六花亭一次囤满一箱带回——保质期只有9–10天（25℃以下保存），第四天再买就过期在飞机上了。</div>
+        <figure class="photo">
+          <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">六花亭 五稜郭店 · “函馆最美六花亭”洋楼</span></div>
+            <figcaption>对应你贴的笔记《函馆最美六花亭》——截图后替换为 <code>&lt;img&gt;</code>；店内免费热咖啡可自拍打卡</figcaption>
+          </figure>
+          <a class="xhs" href="https://xhslink.cn/o/6iOTu2gq00R" target="_blank" rel="noopener">看原帖：函馆最美六花亭<span class="ar">↗</span></a>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">14:00–16:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>汤之川 · 函馆热带植物园（猴子泡温泉）<span class="jp">熱帯植物園</span></h4>
+        <div class="ticket" data-mode="TRAM">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">五稜郭公園前<i>→</i>湯の川温泉</span>
+              <span class="tk-price">约¥300</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">市电 · 约25分 → 步行约10分</span>
+            </div>
+          </div>
+        </div>
+        <p>露天池里的日本猕猴抱团泡温泉，红脸浸在热气里——<b>12月至次年5月的冬季限定</b>名场面。</p>
+        <p class="reason"><b>理由</b>猴子泡温泉只在冬季发生，1月底是最佳观测期；市电直达、门票便宜，是函馆“性价比最高的治愈半小时”，也是小红书流量最稳的素材。顺路即是汤之川温泉街，时间富余可以泡个日归温泉。</p>
+        <a class="xhs" href="https://xhslink.cn/o/4BrWcDHfwp9" target="_blank" rel="noopener">看原帖：函馆二日·把生活调回0.5倍速<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>汤之川温泉街（日归温泉）</b><span class="dist">距热带植物园步行约5–10分</span></p>
+          <p><b>函太郎 回转寿司</b>　汤川温泉一带<span class="dist">距热带植物园步行约10–15分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">17:30–19:30<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>蟹料理 ふさや 或 汤咖喱 Begirama<span class="jp">ふさや / ベギラマ</span></h4>
+        <p>ふさや蟹料理会席（人均约¥6,000–10,000，建议预约）；平价替代是新帖评论区封神的函馆汤咖喱Begirama。</p>
+        <p class="reason"><b>理由</b>你贴的笔记原话：“函馆ふさや：来日本四次吃过最好吃的餐厅”，且另一条笔记说“北海道吃的最好的两顿都在函馆”——本地食评与你的信息源一致指向蟹料理是函馆的收官大餐；想省钱也有可靠替代，两条路都留了。</p>
+        <a class="xhs" href="https://xhslink.cn/o/9HBWJjsdqDp" target="_blank" rel="noopener">看原帖：函馆ふさや——来日本四次吃过最好吃的餐厅<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>Soup Curry Begirama</b>　松風町10-2（A-GATE酒店1F）<span class="dist">距函馆站步行约10分 / 市电松風町站2分</span></p>
+          <p><b>大吉 烧鸟（函馆站前）</b>　若松町一带<span class="dist">距函馆站步行约3分（新帖评论推荐）</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">睡前<small>建议</small></div>
+      <div class="tl-body">
+        <h4>行李对策：宅配便先行<span class="jp">宅配便</span></h4>
+        <p>今晚在酒店前台委托宅配便把大件行李直接寄到札幌的酒店（约¥2,000–2,500/件，次日达），明早只背包上北斗号。</p>
+        <p class="reason"><b>理由</b>北斗号行李架空间有限（尤其大雪天大家都带大箱），4小时车程+到札幌后的换乘，轻装的价值远超两千日元；这是日本冬季旅行的标准做法。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ 札幌离线地图 ============ -->
+<section id="map-sapporo">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">02a · SAPPORO MAP</span>
+      <h2>札幌地图<small>街道地图 · 机场/站点/景点标记</small></h2>
+      <p class="sec-intro">覆盖<b>札幌市区</b>（札幌站 → 大通 → 薄野，西至白色恋人、东至啤酒园）及<b>新千岁机场</b>（F，市区以南 40km）。图例同上，另有地铁 = M。点击地图即可全屏查看（谷歌真实街道图，需联网）。</p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">札幌の地図</span>
+  </div>
+
+  <div class="map-thumb-wrap">
+    <div id="map-sapporo-canvas" style="width:100%;height:260px;background:#eee"></div>
+    <button class="map-zoom-btn" data-map="sapporo">⛶ 全屏查看</button>
+    <button class="map-reset-btn" data-map="sapporo" type="button">⌖ 回初始视野</button>
+  </div>
+
+  
+  
+  <div class="download-steps">
+    <h4>📥 出行离线保障（出发前 1 天 · 2 分钟）</h4>
+    <p class="hint">本页地图：有网 = 真实街道图；无网 = 自动切内置矢量图。<b>断网可导航</b>的只有下面这一步：</p>
+    <ol>
+      <li><b>手机 Google Maps App</b> → 搜「札幌市」→ 点底部地点卡片 → 选<b>「下载离线地图」</b></li>
+      <li><b>框选范围</b>：含札幌站/大通/薄野/白色恋人/新千岁空港 → 下载（有效期 30 天，过期连网点更新）</li>
+      <li><b>完成</b>：到日本断网也能看图、导航、搜地点（公交时刻需联网，建议截图）</li>
+    </ol>
+    <p class="hint">备用：MAPS.ME 下载日本全图（约 200 MB，无需翻墙）。雪天信号弱是常态；札幌 1 月底夜间体感 −10℃，<strong>チカガ（南北线）</strong>是 Day 3 城市漫步主干——札幌站北口 → 大通 → 薄野全程地下连通。</p>
+  </div>
+</section>
+
+<!-- ============ DAY 3 ============ -->
+<section id="day3">
+  <div class="day-head">
+    <div class="day-label">
+      <span class="eyebrow">Day 3 · To Sapporo</span>
+      <h2>移动日 + 札幌<span>北海道纵断4小时，午后城市漫步</span></h2>
+      <p class="day-sub">一早乘特急北斗沿喷火湾海岸线北上，午后到札幌：大通公园雪之回廊、经典地标一线走完，傍晚成吉思汗烤肉，夜里藻岩山或电视塔二选一。</p>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="tl-item">
+      <div class="tl-time">8:59<small>〜12:50</small></div>
+      <div class="tl-body">
+        <h4>JR特急北斗号 函馆 → 札幌<span class="jp">特急北斗</span></h4>
+        <div class="ticket" data-mode="JR">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">函館<i>→</i>札幌</span>
+              <span class="tk-price">¥9,770</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">特急北斗号 · 全车指定席</span>
+            </div>
+          </div>
+        </div>
+        <p>选靠窗位，北段沿喷火湾行驶，晴天能看到驹岳雪山与雪原。车上可补眠。</p>
+        <p class="reason"><b>理由</b>早班准点率最高（午后雪情往往加重），12:50到札幌还保得住半天行程；这条线是本行程最贵的一张票，提前14天用「えきねっと」的トクだ値14买，最低约¥6,840能省下30%。</p>
+        <div class="warn"><b>避雷</b>冬季大雪时北斗号会临时停运（運休）——出发前一晚必查JR北海道官网。Plan B：高速巴士はこだて号（约5.5小时、¥3,820–5,360），或分段走洞爷/长万部，别临时在站内抓瞎。</div>
+        <a class="xhs" href="https://xhslink.cn/o/5tb6lKh8fOq" target="_blank" rel="noopener">看原帖：札幌本地人攻略（交通篇）<span class="ar">↗</span></a>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">12:30–14:30<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>二条市场 海鲜丼<span class="jp">二条市場</span></h4>
+        <p>行李寄存后，从札幌站步行或地铁一站到大通，再步行约8分钟到二条市场。推荐老铺<b>「味之处 だいまる」</b>海鲜丼（约¥2,000–3,500）。</p>
+        <p class="reason"><b>理由</b>到札幌的第一顿海鲜，二条市场是大通商圈步行可达的唯一市场（比郊外的场外市场顺路得多），营业到傍晚，午后抵达刚好赶上；だいまる是市场里的老字号食堂，爱吃蟹可加蟹腿。</p>
+        <div class="rec"><b>提醒</b>二条市场部分店铺周日休业——若Day 3恰逢周日，午餐改选札幌站前或薄野的拉面/汤咖喱更稳。</div>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>根室花まる 回转寿司</b>　南4条西4-1-1 cocono B1<span class="dist">距大通公园步行约15分 / 薄野站直连</span></p>
+          <p><b>うなぎ 角屋</b>　南4条西2·渡边大厦<span class="dist">距薄野站步行约2分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">14:00–17:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>大通公园 → 时计台 → 北海道厅旧本厅舍<span class="jp">大通公園</span></h4>
+        <p>大通公园1.5公里的雪之回廊向东走到头是电视塔；向西折返看<b>时计台</b>（外观）与<b>北海道厅旧本厅舍</b>（红砖建筑，免费参观）。</p>
+        <p class="reason"><b>理由</b>札幌三大地标连成一条步行线，2小时走完不绕路；1.5公里的大通公园被厚雪整段覆盖，走在中间被踩实的雪道上，就是札幌市民冬季日常的散步方式。</p>
+        <div class="rec"><b>隐藏捷径</b>雪大/拉行李时改走<b>札幌地下城 チカガ</b>的<b>南北线</b>：札幌站北口 → ステラ → 大丸 → 薄野，全长约 1.5 km，全程有暖气、热水洗手台和厕所，不必上路。这一段冬季本地人通勤也走，看指示牌跟着「さっぽろ駅」和地下通道箭头即可。</div>
+        <a class="xhs" href="https://xhslink.cn/o/A2uKDHX44qI" target="_blank" rel="noopener">看原帖：札幌citywalk路线推荐<span class="ar">↗</span></a>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>雪印Parlor 冰淇淋</b>　北3条西3<span class="dist">距大通公园步行约3分</span></p>
+          <p><b>根室花まる</b>　JR塔ステラプレイス6F<span class="dist">札幌站直连</span></p>
+        </div>
+        <div class="warn"><b>避雷</b>时计台看外观即可：内部展览空间小且收费，小红书共识“性价比最低的付费景点”。另外JR札幌站的ESTA大楼已于2023年8月闭馆，原楼内拉面共和国已不存在——别扑空，拉面去薄野的拉面横丁或纯连。</div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">17:00–19:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>狸小路 · 伴手礼第一轮<span class="jp">狸小路</span></h4>
+        <p>唐吉诃德狸小路本店（24小时）与BIC CAMERA（西8丁目附近）持护照免税，先买保质期长的：白色恋人、じゃがポックる、药妆。</p>
+        <p class="reason"><b>理由</b>免税直接省10%；且札幌市区先买齐“硬通货”，最后一天赶飞机时不慌——新千岁机场虽货全，但国际线安检后的选择远少于安检前，别把全部采购押在机场。</p>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">17:00–18:30<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>成吉思汗烤肉 だるま本店<span class="jp">ジンギスカン</span></h4>
+        <p>札幌灵魂料理：铁锅烤羔羊肉配洋葱蘸酱汁，人均约¥2,500–3,500。<b>17:00开门第一批进店免排队</b>（平时排队1小时起）。排队时的Plan B：「ひげのうし」或预约制的札幌啤酒园。</p>
+        <p class="reason"><b>理由</b>だるま是薄野的元祖级人气店，见证“北海道羊肉文化”最直接的地方；它不接受预约、纯排队制，所以开门即入是唯一的时间策略——先吃饭再逛街的顺序反过来才对。</p>
+        <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+          <p><b>汤咖喱 GARAKU</b>　大通·南2条西2<span class="dist">距大通公园步行约5分</span></p>
+          <p><b>うなぎ 角屋</b>　南4条西2·渡边大厦<span class="dist">距薄野站步行约2分</span></p>
+        </div>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">19:00–21:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>藻岩山夜景（日本新三大夜景）<span class="jp">藻岩山</span></h4>
+        <div class="ticket" data-mode="CABLE">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">市電・西4丁目<i>→</i>ロープウェイ入口<i>→</i>山頂</span>
+              <span class="tk-price">¥2,100</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">市电 → 免费接驳巴士2分 → 缆车5分 + 迷你缆车2分</span>
+            </div>
+          </div>
+        </div>
+        <p>冬季营业11:00–22:00（末班上山21:30），夜景最佳时段18:00–21:00。</p>
+        <p class="reason"><b>理由</b>藻岩山入选“日本新三大夜景”，与函馆山一南一北隔天各看一场，是北海道夜景的完全体。但若在函馆山已大满足、或当天体力耗尽，果断跳过——夜景会“疲劳”，两场高质量的中间隔一天刚刚好，三场连看则边际收益骤减。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ DAY 4 ============ -->
+<section id="day4">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">04 · Day 4 · Choose Your Route</span>
+      <h2>札幌周边日 · 三选一<small>旭川 / 美瑛 / 小樽</small></h2>
+      <p class="sec-intro">三个方向各一整天：想看企鹅散步去<b>旭川</b>，想拍雪中青池去<b>美瑛</b>，想要雪国运河浪漫去<b>小樽</b>。按下表的“适合谁”对号入座。</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th></th><th>方案A · 旭川</th><th>方案B · 美瑛</th><th>方案C · 小樽</th></tr></thead>
+      <tbody>
+        <tr><td><b>适合谁</b></td><td>想看企鹅散步、喜欢动物园</td><td>想拍雪中青池与蓝色瀑布</td><td>想要雪国浪漫、交通零压力</td></tr>
+        <tr><td><b>王牌</b></td><td>企鹅散步11:00/14:30 两场 + 旭川拉面</td><td>青池雪原 + 白须瀑布 + 日归温泉</td><td>小樽运河雪景 + 玻璃洋房街</td></tr>
+        <tr><td><b>交通难度</b></td><td>低–中（JR + 动物园巴士固定班次）</td><td>高（道北巴士班次极少，需掐表）</td><td>低（JR直达34分）</td></tr>
+        <tr><td><b>当日交通费</b></td><td class="yen">约¥13,000</td><td class="yen">约¥13,800</td><td class="yen">¥1,500</td></tr>
+        <tr><td><b>抗雪天能力</b></td><td>高（室内馆舍多）</td><td>中（巴士看路况）</td><td>高</td></tr>
+        <tr><td><b>回程到札幌</b></td><td>约18:30</td><td>约17:30</td><td>约19:10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Day 4 方案切换">
+    <button class="tab" role="tab" id="tab-a" aria-controls="panel-a" aria-selected="true">方案A · 旭川</button>
+    <button class="tab" role="tab" id="tab-b" aria-controls="panel-b" aria-selected="false">方案B · 美瑛</button>
+    <button class="tab" role="tab" id="tab-c" aria-controls="panel-c" aria-selected="false">方案C · 小樽</button>
+  </div>
+
+  <!-- 方案A -->
+  <div class="tab-panel" id="panel-a" role="tabpanel" aria-labelledby="tab-a">
+    <span class="panel-tag">PLAN A · ASAHIKAWA</span>
+    <p class="panel-lead">一整天献给旭山动物园：看足两场企鹅散步、把“行动展示”的馆舍逛全，下午从容吃一碗本店拉面再回札幌。不赶场，是本方案相对旧版“旭川+美瑛一日游”最大的升级。</p>
+    <ol class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">7:13<small>〜8:40</small></div>
+        <div class="tl-body">
+          <h4>特急ライラック 札幌 → 旭川<span class="jp">特急ライラック</span></h4>
+          <div class="ticket" data-mode="JR" data-loc="A">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">札幌<i>→</i>旭川</span>
+                <span class="tk-price">¥5,440</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">特急ライラック/カムイ · 全车指定席</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>ライラック比高速巴士快近1小时（巴士约2小时¥2,200–3,300）——要赶上11:00的企鹅散步，JR是唯一稳的选项；且雪天JR比巴士可靠得多。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">9:00<small>〜14:45</small></div>
+        <div class="tl-body">
+          <h4>旭山动物园 · 企鹅散步<span class="jp">旭山動物園</span></h4>
+          <div class="ticket" data-mode="BUS">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">旭川駅前<i>→</i>旭山動物園</span>
+                <span class="tk-price">单程¥500</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">巴士总6号乘车处 · 41/47号 · 冬季每30分一班</span>
+              </div>
+            </div>
+          </div>
+          <p>冬季开园<b>10:30–15:30</b>（入园截止15:00），门票¥1,000。<b>企鹅散步11:00与14:30各一场</b>（积雪期的12月中旬–3月中旬限定，1月底两场都有）。提前30分钟去散步路线旁占位，弯道机位最挤。三大馆按企鹅→海豹→北极熊排序。</p>
+          <p class="reason"><b>理由</b>企鹅散步是这座动物园“行动展示”哲学的代表作——不是表演，是企鹅自己的雪地日常，全日本只有这里的冬季看得到；门票¥1,000到2027年4月29日才涨到¥1,400，1月底去正好是最后的低价窗口。冬季开园时间短（15:30闭园），所以必须赶上午场。</p>
+          <div class="warn"><b>避雷</b>道北巴士不收交通IC卡，备好现金；企鹅散步禁止使用闪光灯、禁止伸手触碰。园区在山坡上，雪路防滑优先于拍照。</div>
+          <figure class="photo">
+            <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">旭山动物园 · 冬季限定企鹅散步</span></div>
+            <figcaption>对应你贴的B站vlog《4天3夜北海道旅游-函馆篇》同款雪国素材——截图后替换为 <code>&lt;img&gt;</code></figcaption>
+          </figure>
+          <div class="nearby"><span class="nb-tag">回到旭川站后 · 步行可达</span>
+            <p><b>山头火 旭川本店</b>　1条通<span class="dist">距旭川站步行约8分</span></p>
+            <p><b>梅光轩本店</b>　2条通<span class="dist">距旭川站步行约10分</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">12:30<small>午餐</small></div>
+        <div class="tl-body">
+          <h4>园内简餐<span class="jp">園内レストラン</span></h4>
+          <p>企鹅馆附近的食堂有热食与咖喱（约¥700–1,000），吃完正好等14:30第二场企鹅散步。</p>
+          <p class="reason"><b>理由</b>单日旭川方案的最大红利就是不赶场——午餐在园内解决，下午还能看第二场企鹅散步、把海豹/北极熊馆补完；省掉往返旭川站的1小时折腾。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">14:30<small>第二场</small></div>
+        <div class="tl-body">
+          <h4>企鹅散步 第二场<span class="jp">ペンギンの散歩</span></h4>
+          <p>14:30场次人多，提前20分钟到散步路线旁占位；看完沿出口方向收尾离园。</p>
+          <p class="reason"><b>理由</b>两场企鹅散步的队列与光线不同，下午场雪地光线更柔和；连看两场是“深度玩家”与“到此一游”的分界线，而旧版组合行程只能二选一。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">15:10<small>〜15:50</small></div>
+        <div class="tl-body">
+          <h4>巴士返回旭川站<span class="jp">帰路</span></h4>
+          <div class="ticket" data-mode="JR">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">旭山動物園<i>→</i>旭川駅前</span>
+                <span class="tk-price">单程¥500</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">道北巴士41/47号 · 冬季回程末班约16:10</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>动物园15:30闭园，15:10出发的班次正好衔接，且距回程末班（约16:10）留有充足缓冲——雪天也不慌。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">16:10<small>早晚餐</small></div>
+        <div class="tl-body">
+          <h4>旭川拉面 本店巡礼<span class="jp">旭川ラーメン</span></h4>
+          <p>推荐<b>山头火旭川本店</b>（盐味）或<b>梅光轩本店</b>（酱油），一碗约¥900–1,200。</p>
+          <p class="reason"><b>理由</b>旭川是拉面之城：当地硬水质催生了中卷面+猪油封温的酱油系，本店与东京分店的风味差异明显——“来都来了”在本店才成立；16点吃早晚餐，正好避开饭点排队。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">17:00<small>〜18:28</small></div>
+        <div class="tl-body">
+          <h4>特急ライラック 旭川 → 札幌<span class="jp">帰札</span></h4>
+          <div class="ticket" data-mode="JR">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">旭川<i>→</i>札幌</span>
+                <span class="tk-price">¥5,440</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">特急ライラック/カムイ · 全车指定席</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>傍晚班次密集（约每小时2班），18:30前后到札幌，还能赶上居酒屋黄金时段——比旧版19:30回程多出约1小时的夜生活。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 方案B -->
+  <div class="tab-panel" id="panel-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+    <span class="panel-tag">PLAN B · BIEI</span>
+    <p class="panel-lead">一整天留给美瑛与白金温泉：上午光线最好的时段看雪中青池与白须瀑布，午后白金温泉日归泡汤，黄昏前回札幌。全天依赖一条道北巴士线，掐好班次就不慌——这是冬季美瑛最省心的安排。</p>
+    <ol class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">7:13<small>〜8:40</small></div>
+        <div class="tl-body">
+          <h4>特急ライラック 札幌 → 旭川<span class="jp">特急ライラック</span></h4>
+          <div class="ticket" data-mode="JR" data-loc="A">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">札幌<i>→</i>旭川</span>
+                <span class="tk-price">¥5,440</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">特急ライラック/カムイ · 全车指定席</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>比高速巴士快近1小时且雪天更可靠；8:40到旭川，正好接上9:00前后的富良野线。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">9:00<small>〜9:34</small></div>
+        <div class="tl-body">
+          <h4>JR富良野线 旭川 → 美瑛<span class="jp">富良野線</span></h4>
+          <div class="ticket" data-mode="JR">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">旭川<i>→</i>美瑛</span>
+                <span class="tk-price">约¥250</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">JR富良野线 · 普通</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>车窗右侧是雪原丘陵带，34分钟本身就是观光；9:34到美瑛站，衔接9:40后的道北巴士正合适。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">10:00<small>〜12:30</small></div>
+        <div class="tl-body">
+          <h4>青池 + 白须瀑布<span class="jp">白金青い池・白髭の滝</span></h4>
+          <div class="ticket" data-mode="BUS">
+            <div class="tk-main">
+              <div class="tk-row tk-row--top">
+                <span class="tk-route">美瑛駅前<i>→</i>白金青池入口</span>
+                <span class="tk-price">约¥500</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">道北巴士39/42号 · 白金温泉行</span>
+              </div>
+            </div>
+          </div>
+          <p>青池免费参观。冬季池面结冰覆雪、枯松立在雪原中，是“雪国琉璃”版青池；随后步行约5分钟到白金温泉站旁看<b>白须瀑布</b>——冬季唯一不冻、河水依旧湛蓝的瀑布。</p>
+          <p class="reason"><b>理由</b>青池冬季最佳光线在上午（正午前侧光最立体），单日美瑛方案把最值钱的上午留给青池——这是它相对旧版“下午才到”最大的优势；白须瀑布与青池在同一条巴士线上，步行10分钟顺路打包。</p>
+          <div class="warn"><b>避雷</b>美瑛冬季最大的坑就是交通：观光巴士“美游巴士”冬季基本停运，道北巴士每天班次个位数、末班早。务必提前查好当天时刻表；接不上车就改出租车（美瑛站→青池单程约¥4,000–5,000）。</div>
+          <figure class="photo">
+            <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">美瑛 青池 · 冬季雪原与枯松（“雪国琉璃”版）</span></div>
+            <figcaption>对应你贴的笔记《冬季函馆四天三晚旅行攻略》等北海道冬季帖子——截图后替换为 <code>&lt;img&gt;</code></figcaption>
+          </figure>
+          <div class="nearby"><span class="nb-tag">同一据点 · 步行可达</span>
+            <p><b>白金温泉观光中心</b>（食堂＋日归入浴）<span class="dist">距青池步行约15分 / 距白须瀑布约5分</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">12:30<small>午餐</small></div>
+        <div class="tl-body">
+          <h4>白金温泉食堂 或 美瑛站前<span class="jp">昼食</span></h4>
+          <p>白金温泉观光中心有食堂与咖啡；回程在美瑛站前解决同样顺路（车站周边有咖啡馆与咖喱食堂）。</p>
+          <p class="reason"><b>理由</b>白金一带餐饮选择少，午餐与下午的日归温泉共用“白金”这一个据点，少换乘就是班次少路线最大的安全。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">13:30<small>可选</small></div>
+        <div class="tl-body">
+          <h4>白金温泉 日归泡汤<span class="jp">白金温泉</span></h4>
+          <p>白金温泉观光中心日归入浴（约¥500–1,000），露天池外就是雪林。</p>
+          <p class="reason"><b>理由</b>“看完雪景泡温泉”是美瑛冬季的完整闭环——青池冻透的身体需要一场热汤回血，也顺带补上本行程函馆段没安排的温泉缺口。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">15:00<small>返程</small></div>
+        <div class="tl-body">
+          <h4>美瑛 → 旭川 → 札幌<span class="jp">帰路</span></h4>
+          <p>美瑛站搭富良野线回旭川，接特急ライラック，约17:30到札幌。</p>
+          <p class="reason"><b>理由</b>回程班次比去程多、容错高；16:30天黑前已上车，把“在雪原等末班车”的风险降到零。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 方案C -->
+  <div class="tab-panel" id="panel-c" role="tabpanel" aria-labelledby="tab-c" hidden>
+    <span class="panel-tag">PLAN C · OTARU</span>
+    <p class="panel-lead">札幌周边交通最轻松的一日：JR直达34分钟。堺町通的玻璃与八音盒店、LeTAO试吃、运河雪景，收尾可选天狗山夜景。适合想把Day 4过成“雪国慢片”的人。</p>
+    <ol class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">9:00<small>〜9:34</small></div>
+        <div class="tl-body">
+          <h4>JR快速 札幌 → 小樽<span class="jp">小樽へ</span></h4>
+<div class="ticket" data-mode="JR">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">札幌<i>→</i>小樽</span>
+                <span class="tk-price">¥750</span>
+              </div>
+              <div class="tk-row tk-row--bot">
+                <span class="tk-mode">JR快速エアポート等 · 无需换乘</span>
+              </div>
+            </div>
+          </div>
+          <p class="reason"><b>理由</b>单程34分钟不用换乘，是“周边一日游”里交通心智负担最低的选项——雪天行程求稳时，小樽就是保险方案。沿海线右侧车窗一路是雪色海面。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">10:00<small>〜12:30</small></div>
+        <div class="tl-body">
+          <h4>堺町通 散步<span class="jp">堺町通り</span></h4>
+          <p>小樽站步行10分钟即达。动线：<b>LeTAO本店</b>（双层芝士蛋糕免费试吃，登上钟楼看运河）→ <b>六花亭小樽运河店</b> → 大正硝子馆（手作玻璃）→ <b>八音盒堂</b>（蒸汽钟整点鸣响）→ 北菓楼。</p>
+          <p class="reason"><b>理由</b>一条街集齐北海道伴手礼三大牌（LeTAO/六花亭/北菓楼），试吃大方、玻璃洋房街景本身就是“雪国浪漫”的实体化；小樽限定商品只在此地有——这是它区别于札幌购物的核心价值。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">12:30<small>午餐</small></div>
+        <div class="tl-body">
+          <h4>若鸡时代 なると 本店<span class="jp">若鶏時代</span></h4>
+          <p>招牌唐扬炸鸡（约¥1,000–1,500），大分量；预算宽裕想升级就去老铺<b>政寿司</b>（人均¥5,000起）。</p>
+          <p class="reason"><b>理由</b>若鸡时代是小樽本地人排队吃的国民级炸鸡店，小红书“小樽性价比之王”；同样花一份钱，在这里吃到的是“小镇食堂”的实感而非游客价。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">14:00<small>〜15:30</small></div>
+        <div class="tl-body">
+          <h4>小樽运河<span class="jp">小樽運河</span></h4>
+          <p>浅草桥与中央桥是经典机位，雪覆瓦斯灯沿岸排开，红砖仓库群与运河同框。</p>
+          <p class="reason"><b>理由</b>运河+雪+红砖仓库是小樽的定番构图，白天蓝调下雪质最干净；别为拍照专门绕路出拔小路——结冰路面拍摄点都在主桥面。</p>
+          <div class="warn"><b>避雷</b>大正硝子的玻璃器与八音盒虽然好看，但<b>易碎且重</b>——行李额与托运风险先想清楚再买，最稳是买小型饰品或当场邮寄。</div>
+          <figure class="photo">
+            <div class="photo-box"><span class="photo-tag">图片位</span><span class="photo-name">小樽运河 · 雪覆瓦斯灯与红砖仓库</span></div>
+            <figcaption>对应你贴的笔记《雪国札幌一日攻略》同款雪景氛围——截图后替换为 <code>&lt;img&gt;</code></figcaption>
+          </figure>
+          <div class="nearby"><span class="nb-tag">附近 · 步行可达</span>
+            <p><b>LeTAO 本店</b>　堺町7-16<span class="dist">距运河步行约5分</span></p>
+            <p><b>若鸡时代 なると 本店</b>　稻穗3-16-13<span class="dist">距运河步行约10–12分 / 距小樽站7–10分</span></p>
+            <p><b>政寿司 本店</b>　花园1-1-1<span class="dist">距小樽站步行约5分</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">16:00<small>可选</small></div>
+        <div class="tl-body">
+          <h4>天狗山夜景（体力富余时）<span class="jp">天狗山ロープウェイ</span></h4>
+          <p>小樽站前巴士约15分到山麓站，缆车上山；夜景被选入“日本夜景遗产”。体力一般就跳过，17:00直接回札幌。</p>
+          <p class="reason"><b>理由</b>天狗山俯瞰小樽街灯与海岸线，评价常年高于预期；但本行程已有函馆山+藻岩山两场夜景，夜景疲劳时果断舍弃——看夜景的边际快乐在第三场会跳水。</p>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">18:30<small>晚餐</small></div>
+        <div class="tl-body">
+          <h4>回到札幌：味噌拉面收官<span class="jp">味噌ラーメン</span></h4>
+          <p>JR回札幌（34分），晚餐去薄野<b>拉面横丁</b>或<b>纯连</b>/<b>信玄</b>吃札幌味噌拉面（约¥1,000–1,300）。</p>
+          <p class="reason"><b>理由</b>札幌味噌拉面与函馆盐味是北海道拉面两大门派，此行两端各吃一碗才算闭环；纯连与信玄都是几十年老铺，味噌+黄油+玉米的浓汤正适合雪夜。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ DAY 5 ============ -->
+<section id="day5">
+  <div class="day-head">
+    <div class="day-label">
+      <span class="eyebrow">Day 5 · Departure</span>
+      <h2>归国<span>新千岁机场的最后一轮扫货</span></h2>
+      <p class="day-sub">上午市区补货，中午快速エアポート去机场。国际线的伴手礼店集中在安检<b>前</b>——留足2.5–3小时，别指望进去隔离区再买。</p>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="tl-item">
+      <div class="tl-time">9:30–11:00<small>推荐时段</small></div>
+      <div class="tl-body">
+        <h4>札幌站周边补货<span class="jp">JRタワー・丸井</span></h4>
+        <p>大丸札幌店/丸井今井10:00开门，先把保质期长的买齐：六花亭（给自己这两天吃的量）、白色恋人、じゃがポックる、药妆。</p>
+        <p class="reason"><b>理由</b>市区免税店与机场同价且品类全；把“不会坏的”在市区买完，机场时段就只留给Royce'生巧这类<b>必须最后买</b>的短保质期商品——按保质期倒推购买顺序，是行李与时间双双最优的排法。</p>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">11:00<small>〜11:40</small></div>
+      <div class="tl-body">
+        <h4>JR快速エアポート 札幌 → 新千岁机场<span class="jp">快速エアポート</span></h4>
+        <div class="ticket" data-mode="JR">
+          <div class="tk-main">
+            <div class="tk-row tk-row--top">
+              <span class="tk-route">札幌<i>→</i>新千歳空港</span>
+              <span class="tk-price">¥1,230</span>
+            </div>
+            <div class="tk-row tk-row--bot">
+              <span class="tk-mode">JR快速エアポート · 10–15分钟一班</span>
+            </div>
+          </div>
+        </div>
+        <p class="reason"><b>理由</b>比机场巴士快近一倍（巴士65–77分钟¥1,500）、班次密到不用看时刻表——赶飞机日的交通就选心智负担最低的。想坐4号车厢指定席需另购券¥1,000，37分钟自由席完全够。</p>
+      </div>
+    </li>
+    <li class="tl-item">
+      <div class="tl-time">12:00起<small>提前2.5–3h值机</small></div>
+      <div class="tl-body">
+        <h4>机场扫货：安检前的中央区<span class="jp">新千歳空港</span></h4>
+        <p>国内线航站楼与国内线商店街（安检前）是伴手礼最全的区域：<b>Royce' Chocolate World</b>（免费参观+小火车表演+限定款）→ 六花亭 → 白色恋人 → LeTAO → CALBEE专卖。国际线按各航司提前2.5–3小时值机。</p>
+        <p class="reason"><b>理由</b>新千岁机场的伴手礼主力店都在<b>安检前的公共区</b>，国际线隔离区内选择少得多——“落地前就把购物做完”在这里是错误策略，正确做法是提前到、买完再过安检。Royce'生巧保质期约3周（需冷藏）、冬季常温可携带，是最后买的第一顺位。</p>
+        <div class="rec"><b>提醒</b>若还有余裕，机场“拉面道场”（国内线3楼）可以在日本吃最后一碗北海道拉面再走。</div>
+        <div class="nearby"><span class="nb-tag">机场内 · 安检前</span>
+          <p><b>拉面道场</b>　国内线3F<span class="dist">最后一碗北海道拉面</span></p>
+          <p><b>Royce' Chocolate World</b>　国内线中央区<span class="dist">安检前免费参观＋限定款</span></p>
+        </div>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ 美食 ============ -->
+<section id="food">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">05 · FOOD LIST</span>
+      <h2>美食清单<small>每条都标人均与推荐理由</small></h2>
+      <p class="sec-intro">来源：你贴的小红书笔记（ふさや、朝市、Begirama、人生寿司所代表的本地口碑）＋新帖《马上去函馆和札幌，有没有值得的餐厅推荐》评论区＋日本食评网站的稳定评分，非泛泛而谈的“网红名单”。</p>
+      <p>
+        <a class="xhs" href="https://xhslink.cn/o/985PVt6ZBWT" target="_blank" rel="noopener">看原帖：函馆三家好吃又温馨的店<span class="ar">↗</span></a>
+        <a class="xhs" style="margin-left:8px" href="https://xhslink.cn/o/9XDvaezpCuP" target="_blank" rel="noopener">看原帖：个人觉得无法超越的人生寿司<span class="ar">↗</span></a>
+      </p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">北の食・銘々表</span>
+  </div>
+
+  <div class="food-grid">
+    <div class="food-city">
+      <h3>函馆<small>HAKODATE</small></h3>
+      <div class="dish"><h4>朝市海鲜丼<span class="price">¥2,000–3,000</span></h4><p>恵比寿屋食堂的大碗海鲜丼是朝市名物。理由：7–9点货最鲜人最少，14:00后收摊——时间窗口是硬的。<br><span class="dist">📍位置：函馆朝市·若松町（距函馆站步行约1分）</span></p></div>
+      <div class="dish"><h4>村上海胆 海胆饭<span class="price">¥4,000–6,000</span></h4><p>海胆专门店，产地直送。理由：你笔记里“无法超越的人生寿司”指向的正是这类店——海胆是函馆港的看家货。<br><span class="dist">📍位置：函馆站前·若松町朝市一带（距函馆站步行约5分）</span></p></div>
+      <div class="dish"><h4>蟹料理 ふさや<span class="price">¥6,000–10,000</span></h4><p>你贴的笔记原话“来日本四次吃过最好吃的餐厅”。建议预约，大门横丁附近有分店。<br><span class="dist">📍位置：函馆站前/大门一带（距函馆站步行约3–5分）</span></p></div>
+      <div class="dish"><h4>幸运小丑汉堡<span class="price">¥600–800</span></h4><p>多次获全日本汉堡部门第一。理由：平价+本地客多+中文菜单，是“随便吃吃”的最优解，中华煎蛋汉堡是招牌。<br><span class="dist">📍位置：末広町23-18（贝艾尔本店，距金森红砖仓库步行约2分、市电末広町站3分）</span></p></div>
+      <div class="dish"><h4>盐味拉面 あじさい<span class="price">¥900–1,100</span></h4><p>函馆是盐味拉面发源地。理由：清汤细面与雪夜是绝配，五棱郭店离六花亭步行可达。<br><span class="dist">📍位置：五棱郭·本町一带（距五棱郭塔步行约10分）</span></p></div>
+      <div class="dish"><h4>汤咖喱 Begirama<span class="price">¥1,000–2,000</span></h4><p>新帖评论区认证：“函馆的一家汤咖喱，最好吃的一家！后来去札幌吃的都没这么好吃”——招牌是函馆特色的墨汁乌贼汤咖喱与羊肉汤咖喱。<br><span class="dist">📍位置：松風町10-2·A-GATE酒店1F（距函馆站步行约10分、市电松風町站2分）</span></p></div>
+    </div>
+    <div class="food-city">
+      <h3>札幌<small>SAPPORO</small></h3>
+      <div class="dish"><h4>根室花まる 回转寿司<span class="price">130円起/碟</span></h4><p>新帖评论：“函馆根室花丸，不是本州的花丸能比的”；不能预约、现场取号排队是常态。<br><span class="dist">📍位置：南4条西4-1-1 cocono B1（薄野站直连，距狸小路步行约5分）；札幌站JR塔6F另有分店</span></p></div>
+      <div class="dish"><h4>成吉思汗 だるま本店<span class="price">¥2,500–3,500</span></h4><p>17:00开门即入免排队。理由：纯排队制老铺，烤羔羊肉是札幌的市魂料理。<br><span class="dist">📍位置：薄野·南5条西一带（距地铁薄野站步行约5分）</span></p></div>
+      <div class="dish"><h4>うなぎ 角屋 鳗鱼饭<span class="price">¥3,000–4,500</span></h4><p>新帖评论：“去札幌必吃！”1957年创业的老铺，国产鳗鱼现烤，米饭免费续。<br><span class="dist">📍位置：南4条西2·渡边大厦（距薄野站步行约2分）</span></p></div>
+      <div class="dish"><h4>札幌啤酒园 成吉思汗自助<span class="price">¥5,000–6,000</span></h4><p>百年红砖工厂内含啤酒放题。理由：吃的是工业遗产氛围，需预约。<br><span class="dist">📍位置：苗穗/丰平一带（地铁东丰线丰平公园站步行约12分）</span></p></div>
+      <div class="dish"><h4>汤咖喱 GARAKU / Suage+<span class="price">¥1,300–1,800</span></h4><p>GARAKU是话题店但排队2小时起。理由：同为名店的Suage+队伍短一半——错峰原则的典型应用。<br><span class="dist">📍位置：GARAKU 大通·南2条西2（距大通公园步行约5分）；Suage+ 薄野</span></p></div>
+      <div class="dish"><h4>味噌拉面 纯连 / 信玄<span class="price">¥1,000–1,300</span></h4><p>薄野的两大味噌老铺。理由：与函馆盐味隔空对仗，北海道拉面双城记的另一半。<br><span class="dist">📍位置：薄野一带（距地铁薄野站步行约3–8分）</span></p></div>
+      <div class="dish"><h4>二条市场 だいまる<span class="price">¥2,000–3,500</span></h4><p>海鲜丼老铺食堂。理由：大通步行8分钟可达，是市中心唯一顺路的市场。<br><span class="dist">📍位置：二条市场内·南2条东（距大通公园步行约8分）</span></p></div>
+      <div class="dish"><h4>雪印Parlor 冰淇淋<span class="price">¥500–800</span></h4><p>大通旁的乳业老字号。理由：零下8℃街头吃冰是北海道式浪漫，本地传统而非猎奇。<br><span class="dist">📍位置：大通公园北侧·北3条西3（距大通公园步行约3分）</span></p></div>
+    </div>
+    <div class="food-city">
+      <h3>旭川 · 小樽<small>DAY TRIP</small></h3>
+      <div class="dish"><h4>山头火 旭川本店<span class="price">¥900–1,200</span></h4><p>盐味拉面的本店版本。理由：旭川硬水催生的中卷面+猪油封温工艺，本店风味≠分店风味。<br><span class="dist">📍位置：旭川1条通（距旭川站步行约8分）</span></p></div>
+      <div class="dish"><h4>梅光轩本店（酱油）<span class="price">¥900–1,200</span></h4><p>旭川酱油拉面代表。理由：与山头火二选一，取决于当天想喝清汤还是浓汤。<br><span class="dist">📍位置：旭川2条通（距旭川站步行约10分）</span></p></div>
+      <div class="dish"><h4>若鸡时代 なると 本店<span class="price">¥1,000–1,500</span></h4><p>小樽唐扬炸鸡名店，1952年创业的炸半鸡发祥地。理由：本地人排队的小镇食堂，性价比碾压游客区餐厅。<br><span class="dist">📍位置：稻穗3-16-13（距JR小樽站步行约7–10分、距运河步行约10–12分）</span></p></div>
+      <div class="dish"><h4>政寿司 本店<span class="price">¥5,000起</span></h4><p>小樽寿司老铺，《将太的寿司》取景地。理由：想在一日游里安排一顿“正式和食”时的升级选项。<br><span class="dist">📍位置：花园1-1-1（距小樽站步行约5分）</span></p></div>
+      <div class="dish"><h4>LeTAO本店2F咖啡厅<span class="price">¥1,200–1,800</span></h4><p>双层芝士蛋糕+热饮。理由：逛堺町通走累时的最佳下午茶据点，蛋糕出炉时间问店员。<br><span class="dist">📍位置：堺町7-16（距小樽运河步行约5分）</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 伴手礼 ============ -->
+<section id="omiyage">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">06 · MUST BUY</span>
+      <h2>必买清单<small>按保质期倒推购买顺序</small></h2>
+      <p class="sec-intro">核心原则：保质期短的最后买（机场/旅程末端），保质期长的提前买（市区免税）；在哪买最划算，每一条都写了原因。</p>
+      <p>
+        <a class="xhs" href="https://xhslink.cn/o/5agW6AqbQaT" target="_blank" rel="noopener">看原帖：求助·函馆买什么<span class="ar">↗</span></a>
+        <a class="xhs" style="margin-left:8px" href="https://xhslink.cn/o/3aabGFt4bEX" target="_blank" rel="noopener">看原帖：冬天去北海道必买<span class="ar">↗</span></a>
+      </p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">お土産・必携</span>
+  </div>
+
+  <div class="shop-grid">
+    <div class="shop">
+      <h4>六花亭 マルセイバターサンド<span class="price">¥680起/4枚</span></h4>
+      <div class="meta-line">⚠ 赏味期限仅9–10天（25℃以下）</div>
+      <p><b>北海道销量常年的伴手礼之王</b>，白巧克力+北海道黄油+葡萄干的夹心饼干。五棱郭店有免费热咖啡与试吃体验。<b>购买策略</b>：送人的量放最后在机场买，旅程中买的量是“自己吃”的部分——保质期太短，提前买必然坏在路上。</p>
+    </div>
+    <div class="shop">
+      <h4>白色恋人<span class="price">12枚装约¥1,170</span></h4>
+      <div class="meta-line safe">✓ 保质期长，可提前买</div>
+      <p>全道统一价格，但<b>唐吉诃德/BIC CAMERA免税+优惠券最划算</b>——这就是“别在工厂买”的根据：工厂店无折扣且入馆¥1,200，机场同价。想拍雪中城堡、体验巧克力小火车再去公园（改造后门票含2枚装礼盒）。</p>
+      <a class="xhs" href="https://xhslink.cn/o/2jGgTAmJgOw" target="_blank" rel="noopener">看原帖：来札幌买白色恋人不要在工厂买<span class="ar">↗</span></a>
+    </div>
+    <div class="shop">
+      <h4>Royce' 生巧克力<span class="price">约¥800–900/盒</span></h4>
+      <div class="meta-line">⚠ 保质期约3周（冷藏），避高温</div>
+      <p>冬季常温携带2–3天无虞，但仍建议<b>最后一天在新千岁机场买</b>——Royce' Chocolate World在安检前，限定款最全（薯片巧克力同购）。理由：生巧对温度敏感，行程越靠后买，到家风味越完整。</p>
+    </div>
+    <div class="shop">
+      <h4>LeTAO 双层芝士蛋糕<span class="price">约¥1,700/个</span></h4>
+      <div class="meta-line">⚠ 保质期短（约1–2周，冷藏更佳）</div>
+      <p>小樽限定的招牌，本店有免费试吃。<b>购买策略</b>：去了小樽（方案B）就在本店买当天的；没去小樽则在新千岁机场店补——理由：芝士蛋糕怕震怕热，托运风险高于一切饼干类。</p>
+    </div>
+    <div class="shop">
+      <h4>CALBEE じゃがポックる<span class="price">约¥900/盒</span></h4>
+      <div class="meta-line safe">✓ 保质期长，手信安全牌</div>
+      <p>北海道限定薯条零食，机场与市区唐吉诃德都有。理由：保质期长、接受度广、价格温和——是“不确定对方口味”时最不会出错的伴手礼，适合大批量同事/同学场景。</p>
+    </div>
+    <div class="shop">
+      <h4>北海道神宫 判官さま御守<span class="price">约¥800–1,500</span></h4>
+      <div class="meta-line safe">✓ 耐存放 · 全日本唯一</div>
+      <p>源义经信仰的御守，只有北海道神宫授予所有售。理由：伴手礼同质化时代里“只有这里买得到”的硬通货，送给懂的人是降维打击；需在方案C（市内日）安排神宫行程。</p>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:var(--space-5)"><b>避雷</b>小樽大正硝子玻璃器与大型八音盒：好看但易碎+重，行李额与运输破损风险双高——要买就买小型饰品或选择邮寄。水果类（哈密瓜）1月底非当季，冬天买的温室瓜性价比低。</div>
+</section>
+
+<!-- ============ 避雷 ============ -->
+<section id="avoid">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">07 · PITFALLS</span>
+      <h2>避雷合集<small>每一条都附原因，不是情绪是机制</small></h2>
+      <p class="sec-intro">综合你贴的小红书笔记（“北海道会惩罚每一个不做攻略的人”系列）与官方运营信息整理。</p>
+      <p><a class="xhs" href="https://xhslink.cn/o/8nKIUxyCpHk" target="_blank" rel="noopener">看原帖：北海道真的会惩罚不做攻略的人<span class="ar">↗</span></a></p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">地雷簿・十三箇条</span>
+  </div>
+
+  <ol class="avoid-list">
+    <li><span class="avoid-no">一</span><div><h4>白色恋人在工厂买</h4><p><b>为何</b>工厂店无折扣、入馆另收¥1,200（虽含小礼盒），市区免税店与机场同价还省10%——价格机制决定了工厂只值“体验”不值“采购”。</p></div></li>
+    <li><span class="avoid-no">二</span><div><h4>JR札幌ESTA的拉面共和国</h4><p><b>为何</b>ESTA大楼2023年8月整体闭馆，拉面共和国随之消失——按旧攻略前往会直接扑空，拉面请去薄野横丁/纯连/信玄。</p></div></li>
+    <li><span class="avoid-no">三</span><div><h4>时计台买票入内</h4><p><b>为何</b>内部展览空间小、内容单薄，外观拍照即可——小红书多年共识里“付费性价比最低”的札幌景点。</p></div></li>
+    <li><span class="avoid-no">四</span><div><h4>下午去函馆朝市</h4><p><b>为何</b>多数店铺14:00后收摊、货也经过一上午挑选——朝市的正确打开方式是Day 2清晨，而不是落地当天下午顺路。</p></div></li>
+    <li><span class="avoid-no">五</span><div><h4>函馆山20点后才上山</h4><p><b>为何</b>最佳观赏窗口是日落后30分钟的蓝调时刻（冬季约16:50–17:20），之后只有纯夜景+更冷+更长队——三个变量全部劣化。</p></div></li>
+    <li><span class="avoid-no">六</span><div><h4>企鹅散步卡点到</h4><p><b>为何</b>前排位置提前30分钟就站满；散步队伍约20–40分钟，弯道是最挤机位——11:00场比14:30场相对空（且14:30场赶不上回程巴士）。</p></div></li>
+    <li><span class="avoid-no">七</span><div><h4>冬天指望美瑛的观光巴士</h4><p><b>为何</b>美遊巴士冬季基本停运、道北巴士班次个位数且末班早——冬季美瑛的正确姿势是查好路线巴士时刻、预算出租车、或干脆报一日团。</p></div></li>
+    <li><span class="avoid-no">八</span><div><h4>汤咖喱GARAKU饭点直接去</h4><p><b>为何</b>大通话题店常态排队2小时起——要么开店前30分钟到，要么改去同级别但队伍短的Suage+/ROJIURA，省下的时间够看一场藻岩山夜景。</p></div></li>
+    <li><span class="avoid-no">九</span><div><h4>19点后才去だるま烤肉</h4><p><b>为何</b>纯排队制、晚间排队1–2小时是常态——17:00开门第一批进是唯一稳定解，晚餐时间整体前移是冬季札幌的通用策略。</p></div></li>
+    <li><span class="avoid-no">十</span><div><h4>现金准备不足</h4><p><b>为何</b>朝市、拉面老铺、市电、道北巴士（动物园/青池线）都不收或难收IC与卡——公共交通越深入（旭川美瑛方向）越依赖现金，¥30,000/人是安全线。</p></div></li>
+    <li><span class="avoid-no">十一</span><div><h4>忽视「運休」通知</h4><p><b>为何</b>1月底是北海道降雪峰值，北斗号与巴士每年都有雪天停运——出发前一晚查JR北海道官网是日程里固定的一步，不是可选项。</p></div></li>
+    <li><span class="avoid-no">十二</span><div><h4>夜晚排满室外活动</h4><p><b>为何</b>≈17:00日落+−10℃体感，室外夜景的可持续时间约2小时——夜间行程最多安排一场夜景+室内餐厅，贪多必冻伤。</p></div></li>
+    <li><span class="avoid-no">十三</span><div><h4>冬季自驾美瑛/富良野方向</h4><p><b>为何</b>雪路+结冰+无信号路段对无雪地经验的人是真实危险（攻略站一致警告）——公共交通+一日团组合足够覆盖本行程的所有景点。</p></div></li>
+  </ol>
+</section>
+
+<!-- ============ 预算 ============ -->
+<section id="budget">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">08 · BUDGET</span>
+      <h2>预算估算<small>人均 · 不含机票与住宿</small></h2>
+      <p class="sec-intro">按Day 4选旭川或美瑛的满配口径计算；选小樽方案，当日交通可省约¥11,500。</p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">旅費・見積</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>项目</th><th>明细</th><th>估算（日元）</th></tr></thead>
+      <tbody>
+        <tr><td><b>城市间交通</b></td><td>北斗号¥9,770＋ライラック往返约¥10,880＋Day4区内交通（动物园/青池巴士）约¥500–1,000＋快速エアポート¥1,230</td><td class="yen">约¥22,400<br><small style="color:var(--muted)">早鸟折扣最高可省约¥6,000</small></td></tr>
+        <tr><td><b>市内交通</b></td><td>函馆机场巴士¥700＋市电1日券¥800＋动物园巴士往返约¥1,000＋青池巴士往返约¥1,000＋札幌地铁约¥1,600</td><td class="yen">约¥5,100</td></tr>
+        <tr><td><b>门票缆车</b></td><td>函馆山¥1,800＋五棱郭塔¥1,200＋热带植物园约¥300＋旭山动物园¥1,000＋藻岩山¥2,100（可选）</td><td class="yen">约¥6,400<br><small style="color:var(--muted)">含可选藻岩山</small></td></tr>
+        <tr><td><b>餐饮</b></td><td>人均¥4,000–8,000/天 × 5天（含ふさや蟹会席一次）</td><td class="yen">约¥20,000–40,000</td></tr>
+        <tr><td><b>合计</b></td><td>交通+门票+餐饮</td><td class="yen"><b>约¥54,000–74,000</b><br><small style="color:var(--muted)">约合人民币2,331–3,195元（按100日元≈4.32元）</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="budget-note">
+    <div class="bn"><b>¥9,770<i>最贵一票</i></b><small>函馆→札幌北斗号；提前14天买可省30%</small></div>
+    <div class="bn"><b>¥5,440<i>来回旭川</i></b><small>单程价，来回约¥10,880；一日游团约¥6,000–8,000可替代</small></div>
+    <div class="bn"><b>¥1,000<i>动物园门票</i></b><small>2027年4月29日起涨至¥1,400——1月底是最后的低价窗口</small></div>
+  </div>
+
+  <p class="disclaimer">※ 所有票价均为<b>日元</b>（人民币换算见顶部汇率卡）、营业时间为2026年8月查证（官方来源为主）。冬季各设施的点灯档期、企鹅散步日程、巴士时刻每年微调，出发前2–4周请在各官网复核一次。JR北海道特急自2026年3月14日起全车指定席化，购票方式以えきねっと/绿色窗口为准。</p>
+</section>
+
+<!-- ============ 来源 ============ -->
+<section id="sources">
+  <div class="sec-head">
+    <div class="sec-label">
+      <span class="no">09 · SOURCES</span>
+      <h2>数据来源<small>官方信息为主 · 攻略交叉验证</small></h2>
+      <p class="sec-intro">关键票价与运营信息全部来自官方页面；行程灵感来自你提供的小红书笔记（94篇攻略合集、ふさや、朝市、冬季四天三晚攻略等16条链接）与B站vlog《4天3夜北海道旅游-函馆篇》。<b style="color:var(--ink-soft)">小红书短链在电脑端有登录风控，点不开时把笔记标题复制到手机小红书App搜索即可打开。</b></p>
+    </div>
+    <span class="sec-jp" aria-hidden="true">資料・出典</span>
+  </div>
+  <ul class="src-list">
+    <li><a href="https://334.co.jp/ropeway/price/" target="_blank" rel="noopener">函館山ロープウェイ 運賃表</a><small>（官方）</small></li>
+    <li><a href="https://www.goryokaku-tower.co.jp/price/" target="_blank" rel="noopener">五稜郭タワー 料金・営業時間</a><small>（官方）</small></li>
+    <li><a href="https://www.shiroikoibitopark.jp/zh-hant/facilities.html" target="_blank" rel="noopener">白い恋人パーク 設施・入館費</a><small>（官方）</small></li>
+    <li><a href="https://mt-moiwa.jp?p=25/" target="_blank" rel="noopener">藻岩山ロープウェイ FAQ</a><small>（官方）</small></li>
+    <li><a href="https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/" target="_blank" rel="noopener">旭川市旭山動物園</a><small>（官方，含2027年4月票价改定公告）</small></li>
+    <li><a href="https://www.jrhokkaido.co.jp/global/chinese/travel/furanobiei/course/3a.html" target="_blank" rel="noopener">JR北海道 青池・白鬚瀑布model course</a><small>（官方，含巴士接驳时刻）</small></li>
+    <li><a href="https://www.jrhokkaido.co.jp/CM/Info/press/pdf/20251119_KO_asahikawa-express.pdf" target="_blank" rel="noopener">JR北海道 旭川方面特急全車指定席化通知</a><small>（官方PDF）</small></li>
+    <li><a href="https://www.hakodate.travel/chs/news/the-tram/" target="_blank" rel="noopener">函館市電票价调整公告</a><small>（2025年12月起）</small></li>
+    <li><a href="https://www.hokkaido-airports.com/zh-CHS/hakodate/access/bus/" target="_blank" rel="noopener">函館空港 巴士信息</a><small>（官方）</small></li>
+    <li><a href="https://www.hokkaido-airports.com/" target="_blank" rel="noopener">新千歳空港 交通信息</a><small>（官方）</small></li>
+    <li><a href="https://domingo.ne.jp/zh-TW/article/38450" target="_blank" rel="noopener">Domingo：札幌-函館交通全攻略</a><small>（北斗号¥9,770交叉验证）</small></li>
+    <li><a href="https://gojapan.com.tw/asahiyama-zoo-guide" target="_blank" rel="noopener">GO JAPAN：旭山動物園攻略</a><small>（企鹅散步实拍与卡位）</small></li>
+    <li><a href="https://kimiyo.tw/?p=105683" target="_blank" rel="noopener">喵爸喵媽：旭山動物園巴士购票实拍</a><small>（道北巴士不收IC等细节）</small></li>
+    <li><a href="https://bobbyfun.tw/2023-08-15-2498/" target="_blank" rel="noopener">波比看世界：六花亭必买</a><small>（价格与保质期）</small></li>
+    <li><a href="https://www.letsgojp.cn/archives/729201/" target="_blank" rel="noopener">乐吃购：新千岁机场2026攻略</a><small>（快速エアポート¥1,230）</small></li>
+    <li><a href="https://todolist-japan.com/zh/sapporo-to-asahikawa-transport/" target="_blank" rel="noopener">日旅清单：札幌-旭川交通</a><small>（特急指定席票价交叉验证）</small></li>
+    <li><a href="https://hokkaido.letsgojp.cn/archives/762130" target="_blank" rel="noopener">乐吃购：函馆机场2026攻略</a><small>（机场巴士票价班次）</small></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <span>雪国 · 北海道五天四晚（函馆进 札幌出）</span>
+  <span>2027年1月下旬 · 票价查证于2026年8月 · 以现场为准</span>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  /* tabs */
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){
+        x.setAttribute('aria-selected', x === t ? 'true' : 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(function(p){
+        p.hidden = (p.id !== t.getAttribute('aria-controls'));
+      });
+    });
+  });
+  /* 慢速平滑滚动（约1.1秒，easeInOutCubic，滚轮/触摸可中断） */
+  var scrollAnimId = null;
+  function smoothScrollTo(targetY, duration){
+    if (scrollAnimId){ cancelAnimationFrame(scrollAnimId); scrollAnimId = null; }
+    var startY = window.pageYOffset;
+    var diff = targetY - startY;
+    if (Math.abs(diff) < 2) return;
+    var start;
+    function step(ts){
+      if (start === undefined) start = ts;
+      var t = Math.min((ts - start) / duration, 1);
+      var ease = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+      window.scrollTo(0, startY + diff * ease);
+      if (t < 1) scrollAnimId = requestAnimationFrame(step);
+      else scrollAnimId = null;
+    }
+    var cancel = function(){
+      if (scrollAnimId){ cancelAnimationFrame(scrollAnimId); scrollAnimId = null; }
+      window.removeEventListener('wheel', cancel);
+      window.removeEventListener('touchstart', cancel);
+    };
+    window.addEventListener('wheel', cancel, {passive:true});
+    window.addEventListener('touchstart', cancel, {passive:true});
+    scrollAnimId = requestAnimationFrame(step);
+  }
+  function scrollToHash(hash){
+    var el = document.getElementById(hash.slice(1));
+    if (!el) return false;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - 64; /* topbar 高度 */
+    smoothScrollTo(Math.max(0, y), 1100);
+    return true;
+  }
+  /* 统一拦截页内锚点：目录/顶部导航/速览表链接全部走慢速滚动 */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = a.getAttribute('href');
+      if (href && href.length > 1 && scrollToHash(href)){
+        e.preventDefault();
+        history.pushState(null, '', href);
+      }
+    });
+  });
+  /* 速览表：整行点击跳转 */
+  document.querySelectorAll('tr.day-row').forEach(function(tr){
+    tr.addEventListener('click', function(e){
+      var a = tr.querySelector('.day-jump');
+      /* 链接本身已由统一拦截处理；其它区域用 JS 跳 */
+      if (e.target.tagName === 'A') return;
+      var href = a && a.getAttribute('href');
+      if (href && scrollToHash(href)){
+        history.pushState(null, '', href);
+      }
+    });
+  });
+  /* 票根卡片：注入朱色印章 */
+  document.querySelectorAll('.ticket').forEach(function(t){
+    if (t.querySelector('.tk-seal')) return;
+    var s = document.createElement('span');
+    s.className = 'tk-seal';
+    s.setAttribute('aria-hidden','true');
+    s.textContent = '北海道';
+    t.appendChild(s);
+  });
+  /* 顶栏：下滑后收成右侧胶囊 */
+  function onScroll(){
+    document.body.classList.toggle('scrolled', window.scrollY > 260);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* Leaflet 地图：函馆 + 札幌（OpenStreetMap tile，可双指/滚轮缩放/拖动） */
+  var leafletReady = typeof L !== 'undefined';
+
+
+var HKD = [
+    {type:'train',  lat:41.7744, lng:140.7270, name:'函館駅前', desc:'JR函馆本线始发站 · 特急北斗号 → 札幌 · 换乘市电'},
+    {type:'bus',    lat:41.7695, lng:140.7205, name:'十字街駅', desc:'市电 2/5系统'},
+    {type:'bus',    lat:41.7921, lng:140.7514, name:'五稜郭公園前駅', desc:'市电 2系统'},
+    {type:'bus',    lat:41.7761, lng:140.7876, name:'湯の川温泉駅', desc:'市电 2系统终点'},
+    {type:'airport',lat:41.7697, lng:140.8224, name:'函館空港', desc:'机场接驳巴士 3号乘车场'},
+    {type:'sight',  lat:41.7714, lng:140.7148, name:'函館山ロープウェイ山麓駅', desc:'缆车入口 · ¥1,800 往復'},
+    {type:'shop',   lat:41.7678, lng:140.7206, name:'金森赤レンガ倉庫', desc:'伴手礼/餐饮'},
+    {type:'food',   lat:41.7744, lng:140.7278, name:'函館朝市', desc:'6:00–14:00 · 海鲜丼'},
+    {type:'sight',  lat:41.7914, lng:140.7518, name:'五稜郭タワー', desc:'¥1,200 · 星形要塞'},
+    {type:'sight',  lat:41.7773, lng:140.7888, name:'函館市熱帯植物園', desc:'猴子泡温泉 · ¥300'},
+    {type:'food',   lat:41.7800, lng:140.7350, name:'大門横丁', desc:'居酒屋街'},
+    {type:'shop',   lat:41.7900, lng:140.7510, name:'六花亭 五稜郭店', desc:'免费咖啡 · 伴手礼'},
+    {type:'food',   lat:41.7730, lng:140.7300, name:'あじさい 五棱郭店', desc:'盐味拉面 · ¥900'},
+    {type:'food',   lat:41.7690, lng:140.7200, name:'ラッキーピエロ ベイエリア本店', desc:'末広町23-18 · ¥600–800'}
+  ];
+
+  var SAPPORO = [
+    {type:'airport',lat:42.7752, lng:141.6922, name:'新千歳空港（CTS）', desc:'Day 5 返程 · JR快速エアポート 37分直达札幌'},
+    {type:'train',  lat:43.0687, lng:141.3506, name:'札幌駅', desc:'JR特急ライラック → 旭川/美瑛 · 换乘南北線 N05/N06'},
+    {type:'metro',  lat:43.0618, lng:141.3540, name:'大通駅', desc:'南北/東西/東豊线换乘 · チカガ中心'},
+    {type:'metro',  lat:43.0563, lng:141.3533, name:'すすきの駅', desc:'南北線 N08'},
+    {type:'metro',  lat:43.0669, lng:141.2454, name:'宮の沢駅', desc:'東西線 T01 · 白色恋人公园'},
+    {type:'food',   lat:43.0631, lng:141.3560, name:'二条市場', desc:'海鲜丼老铺'},
+    {type:'sight',  lat:43.0613, lng:141.3536, name:'大通公園', desc:'1.5km 雪之回廊'},
+    {type:'sight',  lat:43.0628, lng:141.3520, name:'時計台', desc:'外观即可'},
+    {type:'sight',  lat:43.0630, lng:141.3527, name:'北海道庁旧本庁舎', desc:'红砖 · 免费'},
+    {type:'shop',   lat:43.0575, lng:141.3495, name:'狸小路商店街', desc:'唐吉诃德 · BIC'},
+    {type:'food',   lat:43.0615, lng:141.3530, name:'雪印Parlor', desc:'大通旁 · 冰淇淋'},
+    {type:'sight',  lat:43.0590, lng:141.3510, name:'さっぽろテレビ塔', desc:'大通东端'},
+    {type:'food',   lat:43.0558, lng:141.3536, name:'cocono B1 根室花丸', desc:'回转寿司 · 130円起'},
+    {type:'food',   lat:43.0555, lng:141.3528, name:'うなぎ 角屋', desc:'南4条西2 · 鳗鱼饭'},
+    {type:'food',   lat:43.0588, lng:141.3470, name:'湯咖喱 GARAKU', desc:'南2条西2'},
+    {type:'food',   lat:43.0692, lng:141.3776, name:'サッポロビール園', desc:'成吉思汗自助'},
+    {type:'shop',   lat:43.0669, lng:141.2454, name:'白い恋人パーク', desc:'¥1,200 · 2026年改造后'},
+    {type:'sight',  lat:43.0310, lng:141.3570, name:'藻岩山ロープウェイ入口', desc:'夜景 · ¥2,100 往復'}
+  ];
+
+  function initLeafletMap(elId, points, center, zoom, bounds){
+    var el = document.getElementById(elId);
+    var region = elId === 'map-hakodate-canvas' ? 'hakodate' : 'sapporo';
+    if (typeof L === 'undefined'){
+      /* 地图库加载失败：提示刷新（不显示自绘地图） */
+      if (el){
+        el.style.height = '180px';
+        el.innerHTML = '<div style="display:flex;height:100%;align-items:center;justify-content:center;color:#A63D2F;font-size:13px;text-align:center;line-height:1.8;padding:12px">地图库加载失败<br>请检查网络后刷新页面重试</div>';
+      }
+      return null;
+    }
+    var map = L.map(el, {scrollWheelZoom:true, zoomControl:true, minZoom:11}).setView(center, zoom);
+    map._initView = {center: center, zoom: zoom};   /* 供"回初始视野"按钮一键复位 */
+    /* 中心瓦片坐标（用于探测源是否可用） */
+    var cp = L.CRS.EPSG3857.latLngToPoint(L.latLng(center[0], center[1]), zoom);
+    var centerProbe = {x: Math.floor(cp.x / 256), y: Math.floor(cp.y / 256)};
+    /* 锁定范围：只展示对应市区区域，拖不出去；minZoom 已限制最小级别 */
+    if (bounds){
+      map.setMaxBounds(L.latLngBounds(bounds));
+    }
+    /* 点击地图本身 → 进入全屏（整屏展示） */
+    map.on('click', function(){
+      var wrap = el.closest('.map-thumb-wrap');
+      if (!wrap || wrap.classList.contains('map-fullscreen')) return;
+      wrap.classList.add('map-fullscreen');
+      var zb = wrap.querySelector('.map-zoom-btn');
+      if (zb) zb.textContent = '✕ 退出全屏';
+      setTimeout(function(){ map.invalidateSize(); }, 100);
+    });
+    var region = elId === 'map-hakodate-canvas' ? 'hakodate' : 'sapporo';
+    /* 瓦片源按优先级排列：本地预下载瓦片（你跑 download_tiles.py 后存在）→ 在线多源自动切换 */
+    var tileSources = [
+      {url:'https://mt1.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}', attr:'Google'},
+      {url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', attr:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'},
+      {url:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', attr:'&copy; OpenStreetMap &copy; CARTO'},
+      {url:'https://rt0.map.gtimg.com/tile?z={z}&x={x}&y={y}&styleid=2&scene=0', attr:'&copy; 腾讯地图'},
+      {url:'https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', attr:'&copy; 高德地图', subdomains:'1234'}
+    ];
+    function mapFail(){
+      var old = el.querySelector('.map-error-overlay');
+      if (old) old.remove();
+      var ov = document.createElement('div');
+      ov.className = 'map-error-overlay';
+      ov.innerHTML = '<div class="map-err-msg">谷歌地图加载失败<br>请检查网络后点击重试</div><div class="map-err-retry">↻ 重新加载</div>';
+      ov.addEventListener('click', function(){
+        ov.remove();
+        trySource(0);
+      });
+      el.appendChild(ov);
+    }
+    function trySource(idx){
+      if (idx >= tileSources.length){
+        /* 所有在线源失败 → 显示重试覆盖层（不显示自绘地图） */
+        mapFail();
+        return;
+      }
+      var src = tileSources[idx];
+      var opts = {attribution: src.attr, maxZoom: src.maxZoom || 19};
+      if (src.subdomains) opts.subdomains = src.subdomains;
+      var l = L.tileLayer(src.url, opts);
+      var ok = false, switched = false;
+      l.on('tileload', function(){ ok = true; });
+      l.on('tileerror', function(){
+        if (ok || switched) return;        /* 已有瓦片成功或已切换 → 不再重复切换 */
+        switched = true;
+        map.removeLayer(l);
+        trySource(idx+1);
+      });
+      l.addTo(map);
+      /* 该源 10 秒内未成功加载任何瓦片 → 换下一源（宽松阈值，避免弱网误杀） */
+      setTimeout(function(){
+        if (!ok && !switched){
+          switched = true;
+          map.removeLayer(l);
+          trySource(idx+1);
+        }
+      }, 10000);
+    }
+    trySource(0);
+    /* 图标标记系统（圆底+白色图案；景点=黄五角星；JR火车=火车头；地铁=M；机场=F） */
+    var TYPE_TAG = {airport:'机场', train:'JR车站', metro:'地铁站', bus:'车站', sight:'景点', shop:'购物', food:'美食'};
+    function pinIcon(type){
+      var inner = '';
+      if (type === 'sight'){
+        inner = '<path d="M12 2.5l2.8 5.9 6.4.8-4.7 4.4 1.2 6.3L12 16.8 6.3 19.9l1.2-6.3L2.8 9.2l6.4-.8z" fill="#F5C518" stroke="#B8860B" stroke-width="1.2"/>';
+      } else {
+        var bg = type === 'shop' ? '#3B6FB5' : (type === 'food' ? '#C0392B' : '#2C3E5C');
+        var glyph = '';
+        if (type === 'shop' || type === 'food'){
+          glyph = '<path d="M5.5 10.5 L12 4.5 L18.5 10.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5 V19 H17.5 V10.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><rect x="10.2" y="14" width="3.6" height="5" fill="#fff"/>';
+        } else if (type === 'train'){
+          /* JR 火车头（正面：车身+前窗+排障器斜线） */
+          glyph = '<path d="M7.5 5.5 H16.5 Q18.8 5.5 18.8 8.2 V14.8 Q18.8 17 16.5 17 H7.5 Q5.2 17 5.2 14.8 V8.2 Q5.2 5.5 7.5 5.5 Z" fill="none" stroke="#fff" stroke-width="1.7"/><rect x="7.6" y="7.6" width="8.8" height="3.2" fill="#fff"/><line x1="7.2" y1="13.2" x2="16.8" y2="13.2" stroke="#fff" stroke-width="1.2"/><path d="M8.2 20.2 L10.4 17.2 M15.8 20.2 L13.6 17.2" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>';
+        } else if (type === 'metro'){
+          /* 地铁 = M 字母 */
+          glyph = '<text x="12" y="16.2" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Arial,Helvetica,sans-serif">M</text>';
+        } else if (type === 'airport'){
+          /* 机场 = F 字母 */
+          glyph = '<text x="12" y="16.2" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Arial,Helvetica,sans-serif">F</text>';
+        } else if (type === 'bus'){
+          glyph = '<rect x="5.5" y="6" width="13" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.7"/><line x1="5.5" y1="11" x2="18.5" y2="11" stroke="#fff" stroke-width="1.3"/><rect x="8" y="7.4" width="3.2" height="2.6" fill="#fff"/><rect x="12.8" y="7.4" width="3.2" height="2.6" fill="#fff"/><circle cx="8.6" cy="17.6" r="1.5" fill="#fff"/><circle cx="15.4" cy="17.6" r="1.5" fill="#fff"/>';
+        }
+        inner = '<circle cx="12" cy="12" r="10" fill="' + bg + '" stroke="#fff" stroke-width="1.6"/>' + glyph;
+      }
+      return L.divIcon({
+        html: '<svg width="26" height="26" viewBox="0 0 24 24" style="display:block;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.35))">' + inner + '</svg>',
+        className: 'map-pin',
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        popupAnchor: [0, -14]
+      });
+    }
+    points.forEach(function(p){
+      var m = L.marker([p.lat, p.lng], {icon: pinIcon(p.type)}).addTo(map);
+      var tag = TYPE_TAG[p.type] || '';
+      m.bindPopup('<b>' + p.name + '</b><br><small style="color:#5B636A">【' + tag + '】' + p.desc + '</small>');
+      m.bindTooltip(p.name, {direction:'top', offset:[0,-14]});
+    });
+    return map;
+  }
+
+  function bootMaps(attempt){
+    attempt = attempt || 0;
+    if (typeof L !== 'undefined'){
+      /* 函馆市区范围（函馆山→五棱郭→汤之川） */
+      window.__hkdMap = initLeafletMap('map-hakodate-canvas', HKD, [41.7730, 140.7420], 13, [[41.66, 140.62],[41.90, 140.87]]);
+      /* 札幌地图延后 600ms 初始化，错开与函馆的并发瓦片请求，避免弱网下竞争同一在线源 */
+      setTimeout(function(){
+        window.__sapporoMap = initLeafletMap('map-sapporo-canvas', SAPPORO, [43.0200, 141.4400], 11, [[42.68, 141.12],[43.16, 141.76]]);
+      }, 600);
+      return;
+    }
+    /* 等兜底CDN（最多约3秒）*/
+    if (attempt < 6){
+      setTimeout(function(){ bootMaps(attempt+1); }, 500);
+    } else {
+      initLeafletMap('map-hakodate-canvas', HKD, [41.7760, 140.7430], 13);
+      initLeafletMap('map-sapporo-canvas', SAPPORO, [43.0620, 141.3540], 13);
+    }
+  }
+  bootMaps();
+
+  /* 全屏按钮 */
+  document.querySelectorAll('.map-zoom-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var wrap = btn.closest('.map-thumb-wrap');
+      if (!wrap) return;
+      var isFull = wrap.classList.toggle('map-fullscreen');
+      var map = btn.dataset.map === 'hakodate' ? window.__hkdMap : window.__sapporoMap;
+      if (map){ setTimeout(function(){ map.invalidateSize(); }, 100); }
+      btn.textContent = isFull ? '✕ 退出全屏' : '⛶ 全屏查看';
+    });
+  });
+  /* 回初始视野按钮（仅全屏时显示）：地图拖动/缩放后一键复位 */
+  document.querySelectorAll('.map-reset-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var map = btn.dataset.map === 'hakodate' ? window.__hkdMap : window.__sapporoMap;
+      if (map && map._initView){ map.setView(map._initView.center, map._initView.zoom); }
+    });
+  });
+
+  /* snow */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('snow');
+  if(!canvas || reduce){ if(canvas) canvas.style.display='none'; return; }
+  var ctx = canvas.getContext('2d');
+  var W, H, flakes = [];
+  function resize(){
+    W = canvas.width = window.innerWidth * devicePixelRatio;
+    H = canvas.height = window.innerHeight * devicePixelRatio;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+  }
+  window.addEventListener('resize', resize, {passive:true});
+  resize();
+  var N = Math.min(70, Math.round(window.innerWidth / 18));
+  for(var i=0;i<N;i++){
+    flakes.push({
+      x: Math.random()*W, y: Math.random()*H,
+      r: (Math.random()*1.6 + .6) * devicePixelRatio,
+      s: Math.random()*.35 + .12,
+      d: Math.random()*2*Math.PI,
+      o: Math.random()*.35 + .18
+    });
+  }
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#31465C';
+    for(var i=0;i<flakes.length;i++){
+      var f = flakes[i];
+      f.y += f.s * devicePixelRatio;
+      f.d += .006;
+      f.x += Math.sin(f.d) * .3 * devicePixelRatio;
+      if(f.y > H + 5){ f.y = -5; f.x = Math.random()*W; }
+      ctx.globalAlpha = f.o;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, 6.283);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
