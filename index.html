@@ -2130,14 +2130,37 @@ var HKD = [
       setTimeout(function(){ map.invalidateSize(); }, 100);
     });
     var region = elId === 'map-hakodate-canvas' ? 'hakodate' : 'sapporo';
-    /* 瓦片源按优先级排列：谷歌镜像（真实街道图）→ 高德（国内直连最稳）→ CartoDB → OSM。
-       注意：腾讯 rt0 源已移除——无 key 时返回白色占位瓦片且不报错，会被误判为加载成功导致白屏。 */
+    /* 瓦片源按优先级排列（2026-10-29 直连实测结论）：
+       1. ESRI World_Street_Map —— 国内直连唯一稳定可用的全球街道图（37KB 真图/1.3s），日本全域覆盖；
+       2. 谷歌镜像 mt1.google.cn —— 域名 DNS 已停析，仅作 VPN 环境下的备选（快速失败不拖时间）；
+       3/4. CartoDB / OSM —— 被墙，仅 VPN 环境兜底。
+       高德/腾讯已移除：两家对日本区域返回 ~180 字节白色占位图且 HTTP 200，会被误判为加载成功导致整屏白。 */
     var tileSources = [
+      {url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', attr:'&copy; Esri'},
       {url:'https://mt1.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}', attr:'Google'},
-      {url:'https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', attr:'&copy; 高德地图', subdomains:'1234'},
       {url:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', attr:'&copy; OpenStreetMap &copy; CARTO'},
       {url:'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', attr:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}
     ];
+    /* 占位白板探测：先取中心瓦片，字节 < 1500 视为占位图（高德/腾讯无数据区返回 124-180 字节白图）→ 跳过该源 */
+    function probeTile(src, cb){
+      var u = src.url
+        .replace('{s}', 'a').replace('{r}', '')
+        .replace('{z}', String(zoom))
+        .replace('{x}', String(centerProbe.x))
+        .replace('{y}', String(centerProbe.y));
+      var done = false;
+      var to = setTimeout(function(){ if(!done){ done = true; cb(null); } }, 6000);
+      fetch(u, {mode:'cors'}).then(function(resp){
+        if (!resp.ok) throw 0;
+        return resp.arrayBuffer();
+      }).then(function(buf){
+        if (done) return; done = true; clearTimeout(to);
+        cb(buf.byteLength >= 1500);
+      }).catch(function(){
+        if (done) return; done = true; clearTimeout(to);
+        cb(null);   /* 探测失败（CORS/网络）无法判定 → 仍尝试该源，由 tileerror/超时兜底 */
+      });
+    }
     function mapFail(){
       var old = el.querySelector('.map-error-overlay');
       if (old) old.remove();
@@ -2157,6 +2180,13 @@ var HKD = [
         return;
       }
       var src = tileSources[idx];
+      /* 先探测：占位白板图直接跳过该源，防止"假加载成功"白屏 */
+      probeTile(src, function(good){
+        if (good === false){ trySource(idx+1); return; }
+        useSource(src, idx);
+      });
+    }
+    function useSource(src, idx){
       var opts = {attribution: src.attr, maxZoom: src.maxZoom || 19};
       if (src.subdomains) opts.subdomains = src.subdomains;
       var l = L.tileLayer(src.url, opts);
